@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://d0l3b6jm4qg3f"
+path="res://.godot/imported/2x2.obj-bd70ef84694b7c8008ad929a4eb9b42b.mesh"
+
+[deps]
+
+files=["res://.godot/imported/2x2.obj-bd70ef84694b7c8008ad929a4eb9b42b.mesh"]
+
+source_file="res://bricks/2x2.obj"
+dest_files=["res://.godot/imported/2x2.obj-bd70ef84694b7c8008ad929a4eb9b42b.mesh", "res://.godot/imported/2x2.obj-bd70ef84694b7c8008ad929a4eb9b42b.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false
