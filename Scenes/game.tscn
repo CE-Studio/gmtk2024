@@ -1,0 +1,43 @@
+[gd_scene load_steps=7 format=3 uid="uid://dj2qkj8rk5w52"]
+
+[ext_resource type="Script" path="res://Scripts/CameraTilt.gd" id="1_lhxop"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_hrbhv"]
+sky_top_color = Color(0.239216, 0.682353, 0.917647, 1)
+sky_horizon_color = Color(0.298039, 0.439216, 0.882353, 1)
+sky_energy_multiplier = 1.5
+ground_horizon_color = Color(0.823529, 0.662745, 0.627451, 1)
+ground_curve = 0.05
+sun_curve = 0.764736
+
+[sub_resource type="Sky" id="Sky_vg1yd"]
+sky_material = SubResource("ProceduralSkyMaterial_hrbhv")
+
+[sub_resource type="Environment" id="Environment_jsdrn"]
+background_mode = 2
+sky = SubResource("Sky_vg1yd")
+ambient_light_source = 3
+ambient_light_color = Color(0.85098, 0.85098, 0.85098, 1)
+ambient_light_sky_contribution = 0.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m832e"]
+albedo_color = Color(0.545098, 0.545098, 0.545098, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_prc6y"]
+material = SubResource("StandardMaterial3D_m832e")
+size = Vector3(2, 0.1, 2)
+
+[node name="Game" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_jsdrn")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 2)
+script = ExtResource("1_lhxop")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_prc6y")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.258819, 0.965926, 0, -0.965926, 0.258819, 0, 0, 0)
