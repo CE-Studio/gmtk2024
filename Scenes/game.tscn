@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://dj2qkj8rk5w52"]
+[gd_scene load_steps=41 format=3 uid="uid://dj2qkj8rk5w52"]
 
 [ext_resource type="Script" path="res://Scripts/CameraTilt.gd" id="1_lhxop"]
 [ext_resource type="PackedScene" uid="uid://bf2sbpklqpo18" path="res://Scenes/buildplate.tscn" id="2_4vgq1"]
@@ -60,9 +60,196 @@ albedo_texture = ExtResource("4_aedql")
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_11oww"]
 albedo_texture = ExtResource("4_aedql")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q77kr"]
-albedo_color = Color(0.658824, 0.658824, 0.658824, 1)
-roughness = 0.8
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_5um56"]
+frequency = 1.0
+offset = Vector3(0, -203.39, 0)
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_di6w2"]
+noise = SubResource("FastNoiseLite_5um56")
+
+[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_mmy3m"]
+texture = SubResource("NoiseTexture2D_di6w2")
+
+[sub_resource type="VisualShaderNodeVectorDecompose" id="VisualShaderNodeVectorDecompose_k2elp"]
+default_input_values = [0, Quaternion(0, 0, 0, 0)]
+op_type = 2
+
+[sub_resource type="VisualShaderNodeRemap" id="VisualShaderNodeRemap_ysxdb"]
+default_input_values = [1, 0.0, 2, 1.0, 3, 0.25, 4, 0.75]
+
+[sub_resource type="VisualShaderNodeRemap" id="VisualShaderNodeRemap_k7av1"]
+default_input_values = [1, 0.0, 2, 1.0, 3, 0.25, 4, 0.75]
+
+[sub_resource type="VisualShaderNodeColorConstant" id="VisualShaderNodeColorConstant_bmxtv"]
+constant = Color(0.658824, 0.658824, 0.658824, 1)
+
+[sub_resource type="VisualShaderNodeIf" id="VisualShaderNodeIf_jcmvk"]
+output_port_for_preview = 0
+default_input_values = [0, 0.0, 1, 0.5, 2, 1e-05, 3, Vector3(0, 0, 0), 4, Vector3(0, 0, 0), 5, Vector3(0, 0, 0)]
+
+[sub_resource type="VisualShaderNodeColorConstant" id="VisualShaderNodeColorConstant_iw0yh"]
+constant = Color(0.498039, 0.498039, 1, 1)
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_q0i8e"]
+input_name = "uv"
+
+[sub_resource type="VisualShaderNodeVectorDecompose" id="VisualShaderNodeVectorDecompose_yiwpg"]
+default_input_values = [0, Vector2(0, 0)]
+op_type = 0
+
+[sub_resource type="VisualShaderNodeVectorCompose" id="VisualShaderNodeVectorCompose_4224r"]
+default_input_values = [0, 0.0, 1, 0.0, 2, 1.0]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_qcbtw"]
+frequency = 1.0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_himiu"]
+width = 1024
+height = 1024
+noise = SubResource("FastNoiseLite_qcbtw")
+
+[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_shoxy"]
+texture = SubResource("NoiseTexture2D_himiu")
+
+[sub_resource type="VisualShaderNodeVectorDecompose" id="VisualShaderNodeVectorDecompose_r3pfq"]
+default_input_values = [0, Quaternion(0, 0, 0, 0)]
+op_type = 2
+
+[sub_resource type="VisualShader" id="VisualShader_0riwy"]
+code = "shader_type spatial;
+render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_lambert, specular_schlick_ggx;
+
+uniform sampler2D tex_frg_8;
+uniform sampler2D tex_frg_10;
+
+
+
+void fragment() {
+// ColorConstant:2
+	vec4 n_out2p0 = vec4(0.658824, 0.658824, 0.658824, 1.000000);
+
+
+// Input:5
+	vec2 n_out5p0 = UV;
+
+
+// VectorDecompose:6
+	float n_out6p0 = n_out5p0.x;
+	float n_out6p1 = n_out5p0.y;
+
+
+// Texture2D:8
+	vec4 n_out8p0 = texture(tex_frg_8, n_out5p0);
+
+
+// VectorDecompose:9
+	float n_out9p0 = n_out8p0.x;
+	float n_out9p1 = n_out8p0.y;
+	float n_out9p2 = n_out8p0.z;
+	float n_out9p3 = n_out8p0.w;
+
+
+	float n_out12p0;
+// Remap:12
+	float n_in12p1 = 0.00000;
+	float n_in12p2 = 1.00000;
+	float n_in12p3 = 0.25000;
+	float n_in12p4 = 0.75000;
+	{
+		float __input_range = n_in12p2 - n_in12p1;
+		float __output_range = n_in12p4 - n_in12p3;
+		n_out12p0 = n_in12p3 + __output_range * ((n_out9p0 - n_in12p1) / __input_range);
+	}
+
+
+// Texture2D:10
+	vec4 n_out10p0 = texture(tex_frg_10, n_out5p0);
+
+
+// VectorDecompose:11
+	float n_out11p0 = n_out10p0.x;
+	float n_out11p1 = n_out10p0.y;
+	float n_out11p2 = n_out10p0.z;
+	float n_out11p3 = n_out10p0.w;
+
+
+	float n_out13p0;
+// Remap:13
+	float n_in13p1 = 0.00000;
+	float n_in13p2 = 1.00000;
+	float n_in13p3 = 0.25000;
+	float n_in13p4 = 0.75000;
+	{
+		float __input_range = n_in13p2 - n_in13p1;
+		float __output_range = n_in13p4 - n_in13p3;
+		n_out13p0 = n_in13p3 + __output_range * ((n_out11p0 - n_in13p1) / __input_range);
+	}
+
+
+// VectorCompose:7
+	float n_in7p2 = 1.00000;
+	vec3 n_out7p0 = vec3(n_out12p0, n_out13p0, n_in7p2);
+
+
+// ColorConstant:4
+	vec4 n_out4p0 = vec4(0.498039, 0.498039, 1.000000, 1.000000);
+
+
+	vec3 n_out3p0;
+// If:3
+	float n_in3p1 = 0.50000;
+	float n_in3p2 = 0.00001;
+	if(abs(n_out6p0 - n_in3p1) < n_in3p2)
+	{
+		n_out3p0 = n_out7p0;
+	}
+	else if(n_out6p0 < n_in3p1)
+	{
+		n_out3p0 = vec3(n_out4p0.xyz);
+	}
+	else
+	{
+		n_out3p0 = n_out7p0;
+	}
+
+
+// Output:0
+	ALBEDO = vec3(n_out2p0.xyz);
+	NORMAL_MAP = n_out3p0;
+
+
+}
+"
+graph_offset = Vector2(-816.759, 220.006)
+nodes/fragment/2/node = SubResource("VisualShaderNodeColorConstant_bmxtv")
+nodes/fragment/2/position = Vector2(216, 135)
+nodes/fragment/3/node = SubResource("VisualShaderNodeIf_jcmvk")
+nodes/fragment/3/position = Vector2(-100, 240)
+nodes/fragment/4/node = SubResource("VisualShaderNodeColorConstant_iw0yh")
+nodes/fragment/4/position = Vector2(-200, 440)
+nodes/fragment/5/node = SubResource("VisualShaderNodeInput_q0i8e")
+nodes/fragment/5/position = Vector2(-800, 120)
+nodes/fragment/6/node = SubResource("VisualShaderNodeVectorDecompose_yiwpg")
+nodes/fragment/6/position = Vector2(-420, 140)
+nodes/fragment/7/node = SubResource("VisualShaderNodeVectorCompose_4224r")
+nodes/fragment/7/position = Vector2(-600, 320)
+nodes/fragment/8/node = SubResource("VisualShaderNodeTexture_shoxy")
+nodes/fragment/8/position = Vector2(-1040, 300)
+nodes/fragment/9/node = SubResource("VisualShaderNodeVectorDecompose_r3pfq")
+nodes/fragment/9/position = Vector2(-800, 360)
+nodes/fragment/10/node = SubResource("VisualShaderNodeTexture_mmy3m")
+nodes/fragment/10/position = Vector2(-1000, 540)
+nodes/fragment/11/node = SubResource("VisualShaderNodeVectorDecompose_k2elp")
+nodes/fragment/11/position = Vector2(-780, 580)
+nodes/fragment/12/node = SubResource("VisualShaderNodeRemap_ysxdb")
+nodes/fragment/12/position = Vector2(-480, 500)
+nodes/fragment/13/node = SubResource("VisualShaderNodeRemap_k7av1")
+nodes/fragment/13/position = Vector2(-480, 700)
+nodes/fragment/connections = PackedInt32Array(2, 0, 0, 0, 3, 0, 0, 9, 4, 0, 3, 5, 5, 0, 6, 0, 6, 0, 3, 0, 7, 0, 3, 3, 7, 0, 3, 4, 5, 0, 8, 0, 5, 0, 10, 0, 8, 0, 9, 0, 10, 0, 11, 0, 9, 0, 12, 0, 12, 0, 7, 0, 11, 0, 13, 0, 13, 0, 7, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wfnc3"]
+render_priority = 0
+shader = SubResource("VisualShader_0riwy")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rkkst"]
 albedo_color = Color(0.105882, 0.117647, 0.176471, 1)
@@ -87,6 +274,7 @@ script = ExtResource("1_lhxop")
 transform = Transform3D(1, 0, 0, 0, 0.258819, 0.965926, 0, -0.965926, 0.258819, 0, 0, 0)
 
 [node name="Buildplate" parent="." instance=ExtResource("2_4vgq1")]
+transform = Transform3D(0.62, 0, 0, 0, 0.62, 0, 0, 0, 0.62, 0, 0, 0)
 
 [node name="Bench" type="MeshInstance3D" parent="."]
 transform = Transform3D(1.12055e-16, 0, 1.83, 0, 1.83, 0, -1.83, 0, 1.12055e-16, 0, -1.60773, 2)
@@ -107,6 +295,6 @@ surface_material_override/11 = SubResource("StandardMaterial3D_11oww")
 [node name="Bench2" type="MeshInstance3D" parent="."]
 transform = Transform3D(-1.095, 0, 1.34099e-16, 0, 1.095, 0, -1.34099e-16, 0, -1.095, 0, -1.60773, -0.0124135)
 mesh = ExtResource("5_vgmqy")
-surface_material_override/0 = SubResource("StandardMaterial3D_q77kr")
+surface_material_override/0 = SubResource("ShaderMaterial_wfnc3")
 surface_material_override/1 = SubResource("StandardMaterial3D_rkkst")
 surface_material_override/2 = SubResource("StandardMaterial3D_uccdl")
