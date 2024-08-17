@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://bf2sbpklqpo18"]
+[gd_scene load_steps=7 format=3 uid="uid://bf2sbpklqpo18"]
 
 [ext_resource type="Script" path="res://Scripts/buildplate.gd" id="1_7u8fs"]
+[ext_resource type="ArrayMesh" uid="uid://dgfv6ct5xhlvf" path="res://bricks/1x1.obj" id="2_4rdvr"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m832e"]
 albedo_color = Color(0.545098, 0.545098, 0.545098, 1)
@@ -9,8 +10,27 @@ albedo_color = Color(0.545098, 0.545098, 0.545098, 1)
 material = SubResource("StandardMaterial3D_m832e")
 size = Vector3(2, 0.1, 2)
 
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_a7o53"]
+points = PackedVector3Array(-1, 0, -1, -1, 0, 1, 1, 0, -1, 1, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4e2o7"]
+albedo_color = Color(1, 0.160784, 1, 1)
+
 [node name="Buildplate" type="Node3D"]
 script = ExtResource("1_7u8fs")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.05, 0)
 mesh = SubResource("BoxMesh_xpx2q")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_a7o53")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.16, 0, 0, 0, 0.16, 0, 0, 0, 0.16, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_4e2o7")
+mesh = ExtResource("2_4rdvr")
+
+[connection signal="input_event" from="StaticBody3D" to="." method="click_event"]
