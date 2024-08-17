@@ -1,14 +1,66 @@
-[gd_scene load_steps=7 format=3 uid="uid://bf2sbpklqpo18"]
+[gd_scene load_steps=19 format=3 uid="uid://bf2sbpklqpo18"]
 
 [ext_resource type="Script" path="res://Scripts/buildplate.gd" id="1_7u8fs"]
 [ext_resource type="ArrayMesh" uid="uid://dgfv6ct5xhlvf" path="res://bricks/1x1.obj" id="2_4rdvr"]
+[ext_resource type="Texture2D" uid="uid://cttnm7sgp28w5" path="res://Textures/buildstud.png" id="2_cxhyq"]
+[ext_resource type="Texture2D" uid="uid://corl25w7ux44l" path="res://Textures/brickroad t.png" id="4_2me3m"]
+[ext_resource type="Texture2D" uid="uid://cngkf8kqvi0u2" path="res://Textures/brickroad s.png" id="5_5wn8w"]
+[ext_resource type="Texture2D" uid="uid://dderdmdu5d418" path="res://Textures/brickroad n.png" id="6_mgkfn"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m832e"]
-albedo_color = Color(0.545098, 0.545098, 0.545098, 1)
+[sub_resource type="PlaneMesh" id="PlaneMesh_scig6"]
 
-[sub_resource type="BoxMesh" id="BoxMesh_xpx2q"]
-material = SubResource("StandardMaterial3D_m832e")
-size = Vector3(2, 0.1, 2)
+[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_0fw5k"]
+texture = ExtResource("2_cxhyq")
+texture_type = 1
+
+[sub_resource type="VisualShaderNodeVectorOp" id="VisualShaderNodeVectorOp_c0tbu"]
+default_input_values = [0, Vector2(0, 0), 1, Vector2(25, 25)]
+op_type = 0
+operator = 2
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_kgl4l"]
+input_name = "uv"
+
+[sub_resource type="VisualShader" id="VisualShader_d62jb"]
+code = "shader_type spatial;
+render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_lambert, specular_schlick_ggx;
+
+uniform sampler2D tex_frg_2 : source_color;
+
+
+
+void fragment() {
+// Input:4
+	vec2 n_out4p0 = UV;
+
+
+// VectorOp:3
+	vec2 n_in3p1 = vec2(25.00000, 25.00000);
+	vec2 n_out3p0 = n_out4p0 * n_in3p1;
+
+
+// Texture2D:2
+	vec4 n_out2p0 = texture(tex_frg_2, n_out3p0);
+
+
+// Output:0
+	ALBEDO = vec3(n_out2p0.xyz);
+
+
+}
+"
+graph_offset = Vector2(-397.625, -69.4801)
+nodes/fragment/2/node = SubResource("VisualShaderNodeTexture_0fw5k")
+nodes/fragment/2/position = Vector2(0, 160)
+nodes/fragment/3/node = SubResource("VisualShaderNodeVectorOp_c0tbu")
+nodes/fragment/3/position = Vector2(-280, 160)
+nodes/fragment/4/node = SubResource("VisualShaderNodeInput_kgl4l")
+nodes/fragment/4/position = Vector2(-660, 180)
+nodes/fragment/connections = PackedInt32Array(2, 0, 0, 0, 3, 0, 2, 0, 4, 0, 3, 0)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_45tyr"]
+render_priority = 0
+shader = SubResource("VisualShader_d62jb")
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_a7o53"]
 points = PackedVector3Array(-1, 0, -1, -1, 0, 1, 1, 0, -1, 1, 0, 1)
@@ -19,12 +71,24 @@ albedo_color = Color(0.203922, 1, 1, 0.396078)
 emission_enabled = true
 emission = Color(0.203922, 1, 1, 1)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vjybu"]
+albedo_texture = ExtResource("4_2me3m")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_5ymlp"]
+size = Vector2(0.5, 0.5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pwm44"]
+albedo_texture = ExtResource("5_5wn8w")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kwxoq"]
+albedo_texture = ExtResource("6_mgkfn")
+
 [node name="Buildplate" type="Node3D"]
 script = ExtResource("1_7u8fs")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.05, 0)
-mesh = SubResource("BoxMesh_xpx2q")
+mesh = SubResource("PlaneMesh_scig6")
+surface_material_override/0 = SubResource("ShaderMaterial_45tyr")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
 
@@ -35,5 +99,107 @@ shape = SubResource("ConvexPolygonShape3D_a7o53")
 transform = Transform3D(0.16, 0, 0, 0, 0.16, 0, 0, 0, 0.16, 0, 0, 0)
 material_override = SubResource("StandardMaterial3D_4e2o7")
 mesh = ExtResource("2_4rdvr")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.25, 0, 1.25)
+material_override = SubResource("StandardMaterial3D_vjybu")
+mesh = SubResource("PlaneMesh_5ymlp")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.75, 0, 1.25)
+material_override = SubResource("StandardMaterial3D_pwm44")
+mesh = SubResource("PlaneMesh_5ymlp")
+
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.25, 0, 1.25)
+material_override = SubResource("StandardMaterial3D_pwm44")
+mesh = SubResource("PlaneMesh_5ymlp")
+
+[node name="MeshInstance3D7" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, 0, 1.25)
+material_override = SubResource("StandardMaterial3D_pwm44")
+mesh = SubResource("PlaneMesh_5ymlp")
+
+[node name="MeshInstance3D8" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.75, 0, 1.25)
+material_override = SubResource("StandardMaterial3D_pwm44")
+mesh = SubResource("PlaneMesh_5ymlp")
+
+[node name="MeshInstance3D9" type="MeshInstance3D" parent="."]
+transform = Transform3D(6.12323e-17, 0, 1, 0, 1, 0, -1, 0, 6.12323e-17, 1.25, 0, 0.75)
+material_override = SubResource("StandardMaterial3D_pwm44")
+mesh = SubResource("PlaneMesh_5ymlp")
+
+[node name="MeshInstance3D10" type="MeshInstance3D" parent="."]
+transform = Transform3D(6.12323e-17, 0, 1, 0, 1, 0, -1, 0, 6.12323e-17, -1.25, 0, 0.75)
+material_override = SubResource("StandardMaterial3D_pwm44")
+mesh = SubResource("PlaneMesh_5ymlp")
+
+[node name="MeshInstance3D11" type="MeshInstance3D" parent="."]
+transform = Transform3D(6.12323e-17, 0, 1, 0, 1, 0, -1, 0, 6.12323e-17, 1.25, 0, 0.25)
+material_override = SubResource("StandardMaterial3D_pwm44")
+mesh = SubResource("PlaneMesh_5ymlp")
+
+[node name="MeshInstance3D12" type="MeshInstance3D" parent="."]
+transform = Transform3D(6.12323e-17, 0, 1, 0, 1, 0, -1, 0, 6.12323e-17, -1.25, 0, 0.25)
+material_override = SubResource("StandardMaterial3D_pwm44")
+mesh = SubResource("PlaneMesh_5ymlp")
+
+[node name="MeshInstance3D13" type="MeshInstance3D" parent="."]
+transform = Transform3D(6.12323e-17, 0, 1, 0, 1, 0, -1, 0, 6.12323e-17, 1.25, 0, -0.25)
+material_override = SubResource("StandardMaterial3D_pwm44")
+mesh = SubResource("PlaneMesh_5ymlp")
+
+[node name="MeshInstance3D14" type="MeshInstance3D" parent="."]
+transform = Transform3D(6.12323e-17, 0, 1, 0, 1, 0, -1, 0, 6.12323e-17, -1.25, 0, -0.25)
+material_override = SubResource("StandardMaterial3D_pwm44")
+mesh = SubResource("PlaneMesh_5ymlp")
+
+[node name="MeshInstance3D15" type="MeshInstance3D" parent="."]
+transform = Transform3D(6.12323e-17, 0, 1, 0, 1, 0, -1, 0, 6.12323e-17, 1.25, 0, -0.75)
+material_override = SubResource("StandardMaterial3D_pwm44")
+mesh = SubResource("PlaneMesh_5ymlp")
+
+[node name="MeshInstance3D16" type="MeshInstance3D" parent="."]
+transform = Transform3D(6.12323e-17, 0, 1, 0, 1, 0, -1, 0, 6.12323e-17, -1.25, 0, -0.75)
+material_override = SubResource("StandardMaterial3D_pwm44")
+mesh = SubResource("PlaneMesh_5ymlp")
+
+[node name="MeshInstance3D17" type="MeshInstance3D" parent="."]
+transform = Transform3D(6.12323e-17, 0, 1, 0, 1, 0, -1, 0, 6.12323e-17, 1.25, 0, -1.25)
+material_override = SubResource("StandardMaterial3D_pwm44")
+mesh = SubResource("PlaneMesh_5ymlp")
+
+[node name="MeshInstance3D19" type="MeshInstance3D" parent="."]
+transform = Transform3D(6.12323e-17, 0, 1, 0, 1, 0, -1, 0, 6.12323e-17, 0.75, 0, -1.25)
+material_override = SubResource("StandardMaterial3D_kwxoq")
+mesh = SubResource("PlaneMesh_5ymlp")
+
+[node name="MeshInstance3D20" type="MeshInstance3D" parent="."]
+transform = Transform3D(6.12323e-17, 0, 1, 0, 1, 0, -1, 0, 6.12323e-17, 0.25, 0, -1.25)
+material_override = SubResource("StandardMaterial3D_kwxoq")
+mesh = SubResource("PlaneMesh_5ymlp")
+
+[node name="MeshInstance3D21" type="MeshInstance3D" parent="."]
+transform = Transform3D(6.12323e-17, 0, 1, 0, 1, 0, -1, 0, 6.12323e-17, -0.25, 0, -1.25)
+material_override = SubResource("StandardMaterial3D_kwxoq")
+mesh = SubResource("PlaneMesh_5ymlp")
+
+[node name="MeshInstance3D22" type="MeshInstance3D" parent="."]
+transform = Transform3D(6.12323e-17, 0, 1, 0, 1, 0, -1, 0, 6.12323e-17, -0.75, 0, -1.25)
+material_override = SubResource("StandardMaterial3D_kwxoq")
+mesh = SubResource("PlaneMesh_5ymlp")
+
+[node name="MeshInstance3D18" type="MeshInstance3D" parent="."]
+transform = Transform3D(6.12323e-17, 0, 1, 0, 1, 0, -1, 0, 6.12323e-17, -1.25, 0, -1.25)
+material_override = SubResource("StandardMaterial3D_pwm44")
+mesh = SubResource("PlaneMesh_5ymlp")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.25, 0, 1.25)
+material_override = SubResource("StandardMaterial3D_vjybu")
+mesh = SubResource("PlaneMesh_5ymlp")
 
 [connection signal="input_event" from="StaticBody3D" to="." method="click_event"]
