@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://dj2qkj8rk5w52"]
+[gd_scene load_steps=24 format=3 uid="uid://dj2qkj8rk5w52"]
 
 [ext_resource type="Script" path="res://Scripts/CameraTilt.gd" id="1_lhxop"]
 [ext_resource type="PackedScene" uid="uid://bf2sbpklqpo18" path="res://Scenes/buildplate.tscn" id="2_4vgq1"]
@@ -60,6 +60,20 @@ albedo_texture = ExtResource("4_aedql")
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_11oww"]
 albedo_texture = ExtResource("4_aedql")
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q77kr"]
+albedo_color = Color(0.658824, 0.658824, 0.658824, 1)
+roughness = 0.8
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rkkst"]
+albedo_color = Color(0.105882, 0.117647, 0.176471, 1)
+metallic = 0.1
+roughness = 0.6
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uccdl"]
+albedo_color = Color(0.105882, 0.117647, 0.176471, 1)
+metallic = 0.1
+roughness = 0.6
+
 [node name="Game" type="Node3D"]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
@@ -93,6 +107,6 @@ surface_material_override/11 = SubResource("StandardMaterial3D_11oww")
 [node name="Bench2" type="MeshInstance3D" parent="."]
 transform = Transform3D(-1.095, 0, 1.34099e-16, 0, 1.095, 0, -1.34099e-16, 0, -1.095, 0, -1.60773, -0.0124135)
 mesh = ExtResource("5_vgmqy")
-surface_material_override/0 = SubResource("StandardMaterial3D_nsu47")
-surface_material_override/1 = SubResource("StandardMaterial3D_3d3i5")
-surface_material_override/2 = SubResource("StandardMaterial3D_x4uf7")
+surface_material_override/0 = SubResource("StandardMaterial3D_q77kr")
+surface_material_override/1 = SubResource("StandardMaterial3D_rkkst")
+surface_material_override/2 = SubResource("StandardMaterial3D_uccdl")
