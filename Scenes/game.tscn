@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://dj2qkj8rk5w52"]
 
 [ext_resource type="Script" path="res://Scripts/CameraTilt.gd" id="1_lhxop"]
-[ext_resource type="PackedScene" path="res://Scenes/buildplate.tscn" id="2_4vgq1"]
+[ext_resource type="PackedScene" uid="uid://bf2sbpklqpo18" path="res://Scenes/buildplate.tscn" id="2_4vgq1"]
 [ext_resource type="ArrayMesh" uid="uid://c30ixpvjiulrk" path="res://Models/bench.obj" id="3_07svr"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_hrbhv"]
