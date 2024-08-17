@@ -1,7 +1,7 @@
 [gd_scene load_steps=20 format=3 uid="uid://dj2qkj8rk5w52"]
 
 [ext_resource type="Script" path="res://Scripts/CameraTilt.gd" id="1_lhxop"]
-[ext_resource type="PackedScene" path="res://Scenes/buildplate.tscn" id="2_4vgq1"]
+[ext_resource type="PackedScene" uid="uid://bf2sbpklqpo18" path="res://Scenes/buildplate.tscn" id="2_4vgq1"]
 [ext_resource type="ArrayMesh" uid="uid://c30ixpvjiulrk" path="res://Models/bench.obj" id="3_07svr"]
 [ext_resource type="Texture2D" uid="uid://qvalf6acfkjb" path="res://Textures/BenchTexture.png" id="4_aedql"]
 
@@ -74,7 +74,7 @@ transform = Transform3D(1, 0, 0, 0, 0.258819, 0.965926, 0, -0.965926, 0.258819, 
 [node name="Buildplate" parent="." instance=ExtResource("2_4vgq1")]
 
 [node name="Bench" type="MeshInstance3D" parent="."]
-transform = Transform3D(6.12323e-17, 0, 1, 0, 1, 0, -1, 0, 6.12323e-17, 0, 0, 2)
+transform = Transform3D(1.12055e-16, 0, 1.83, 0, 1.83, 0, -1.83, 0, 1.12055e-16, 0, -1.60773, 2)
 mesh = ExtResource("3_07svr")
 surface_material_override/0 = SubResource("StandardMaterial3D_nsu47")
 surface_material_override/1 = SubResource("StandardMaterial3D_3d3i5")
