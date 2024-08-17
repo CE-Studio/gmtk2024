@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://dj2qkj8rk5w52"]
+[gd_scene load_steps=20 format=3 uid="uid://dj2qkj8rk5w52"]
 
 [ext_resource type="Script" path="res://Scripts/CameraTilt.gd" id="1_lhxop"]
-[ext_resource type="PackedScene" uid="uid://bf2sbpklqpo18" path="res://Scenes/buildplate.tscn" id="2_4vgq1"]
+[ext_resource type="PackedScene" path="res://Scenes/buildplate.tscn" id="2_4vgq1"]
 [ext_resource type="ArrayMesh" uid="uid://c30ixpvjiulrk" path="res://Models/bench.obj" id="3_07svr"]
+[ext_resource type="Texture2D" uid="uid://qvalf6acfkjb" path="res://Textures/BenchTexture.png" id="4_aedql"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_hrbhv"]
 sky_top_color = Color(0.239216, 0.682353, 0.917647, 1)
@@ -22,6 +23,42 @@ ambient_light_source = 3
 ambient_light_color = Color(0.85098, 0.85098, 0.85098, 1)
 ambient_light_sky_contribution = 0.0
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nsu47"]
+albedo_texture = ExtResource("4_aedql")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3d3i5"]
+albedo_texture = ExtResource("4_aedql")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x4uf7"]
+albedo_texture = ExtResource("4_aedql")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_eaxyp"]
+albedo_texture = ExtResource("4_aedql")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ovtp8"]
+albedo_texture = ExtResource("4_aedql")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ualou"]
+albedo_texture = ExtResource("4_aedql")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q8cgm"]
+albedo_texture = ExtResource("4_aedql")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yi16k"]
+albedo_texture = ExtResource("4_aedql")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2scpk"]
+albedo_texture = ExtResource("4_aedql")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_68a8a"]
+albedo_texture = ExtResource("4_aedql")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d1rbn"]
+albedo_texture = ExtResource("4_aedql")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_11oww"]
+albedo_texture = ExtResource("4_aedql")
+
 [node name="Game" type="Node3D"]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
@@ -39,3 +76,15 @@ transform = Transform3D(1, 0, 0, 0, 0.258819, 0.965926, 0, -0.965926, 0.258819, 
 [node name="Bench" type="MeshInstance3D" parent="."]
 transform = Transform3D(6.12323e-17, 0, 1, 0, 1, 0, -1, 0, 6.12323e-17, 0, 0, 2)
 mesh = ExtResource("3_07svr")
+surface_material_override/0 = SubResource("StandardMaterial3D_nsu47")
+surface_material_override/1 = SubResource("StandardMaterial3D_3d3i5")
+surface_material_override/2 = SubResource("StandardMaterial3D_x4uf7")
+surface_material_override/3 = SubResource("StandardMaterial3D_eaxyp")
+surface_material_override/4 = SubResource("StandardMaterial3D_ovtp8")
+surface_material_override/5 = SubResource("StandardMaterial3D_ualou")
+surface_material_override/6 = SubResource("StandardMaterial3D_q8cgm")
+surface_material_override/7 = SubResource("StandardMaterial3D_yi16k")
+surface_material_override/8 = SubResource("StandardMaterial3D_2scpk")
+surface_material_override/9 = SubResource("StandardMaterial3D_68a8a")
+surface_material_override/10 = SubResource("StandardMaterial3D_d1rbn")
+surface_material_override/11 = SubResource("StandardMaterial3D_11oww")
