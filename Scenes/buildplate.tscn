@@ -67,9 +67,8 @@ points = PackedVector3Array(-1, 0, -1, -1, 0, 1, 1, 0, -1, 1, 0, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4e2o7"]
 transparency = 1
+shading_mode = 0
 albedo_color = Color(0.203922, 1, 1, 0.396078)
-emission_enabled = true
-emission = Color(0.203922, 1, 1, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vjybu"]
 albedo_texture = ExtResource("4_2me3m")
@@ -85,6 +84,8 @@ albedo_texture = ExtResource("6_mgkfn")
 
 [node name="Buildplate" type="Node3D"]
 script = ExtResource("1_7u8fs")
+okColor = Color(0.203922, 1, 1, 0.396078)
+badColor = Color(1, 0, 0, 0.909804)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("PlaneMesh_scig6")
