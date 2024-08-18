@@ -4,6 +4,7 @@ class_name Brick
 
 @export var size:Vector3i
 @export var offset:Vector2i
+@export var allowplace := true
 var pos:Vector3i = Vector3i.ZERO
 var rot:int = 0
 
@@ -72,5 +73,5 @@ func _on_static_body_3d_input_event(camera: Node, event: InputEvent, pos: Vector
 	if event.is_action_pressed("game_break"):
 		fill(false)
 		queue_free()
-	else:
+	elif allowplace:
 		BuildPlate.instance.click_event(camera, event, pos, normal, shape_idx)
