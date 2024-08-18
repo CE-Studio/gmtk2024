@@ -6,7 +6,9 @@ static var _area:Array = []
 static var instance:BuildPlate
 
 static var parts:Array[Brick] = [
-	preload("res://bricks/scn/2x2.tscn").instantiate()
+	preload("res://bricks/scn/1x1.tscn").instantiate(),
+	preload("res://bricks/scn/1x2.tscn").instantiate(),
+	preload("res://bricks/scn/2x2.tscn").instantiate(),
 ]
 
 
@@ -63,7 +65,7 @@ func _ready() -> void:
 			_area[-1].append([])
 			for z in 25:
 				_area[-1][-1].append(false)
-	setBrick(0)
+	setBrick(2)
 
 
 func setBrick(id:int) -> void:
