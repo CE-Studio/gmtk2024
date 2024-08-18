@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://dh35l703r228"]
+
+[ext_resource type="Script" path="res://Scripts/swatch.gd" id="1_qb2v5"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_04k2b"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_lwefa"]
+size = Vector3(0.08, 0.08, 0.08)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_j6rge"]
+data = PackedVector3Array(-0.04, 0.04, 0.04, 0.04, 0.04, 0.04, -0.04, -0.04, 0.04, 0.04, 0.04, 0.04, 0.04, -0.04, 0.04, -0.04, -0.04, 0.04, 0.04, 0.04, -0.04, -0.04, 0.04, -0.04, 0.04, -0.04, -0.04, -0.04, 0.04, -0.04, -0.04, -0.04, -0.04, 0.04, -0.04, -0.04, 0.04, 0.04, 0.04, 0.04, 0.04, -0.04, 0.04, -0.04, 0.04, 0.04, 0.04, -0.04, 0.04, -0.04, -0.04, 0.04, -0.04, 0.04, -0.04, 0.04, -0.04, -0.04, 0.04, 0.04, -0.04, -0.04, -0.04, -0.04, 0.04, 0.04, -0.04, -0.04, 0.04, -0.04, -0.04, -0.04, 0.04, 0.04, 0.04, -0.04, 0.04, 0.04, 0.04, 0.04, -0.04, -0.04, 0.04, 0.04, -0.04, 0.04, -0.04, 0.04, 0.04, -0.04, -0.04, -0.04, 0.04, 0.04, -0.04, 0.04, -0.04, -0.04, -0.04, 0.04, -0.04, 0.04, 0.04, -0.04, -0.04, -0.04, -0.04, -0.04)
+
+[node name="MeshInstance3D" type="MeshInstance3D"]
+material_override = SubResource("StandardMaterial3D_04k2b")
+mesh = SubResource("BoxMesh_lwefa")
+script = ExtResource("1_qb2v5")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_j6rge")
+
+[connection signal="input_event" from="StaticBody3D" to="." method="_on_static_body_3d_input_event"]
