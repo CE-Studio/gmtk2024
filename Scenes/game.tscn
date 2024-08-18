@@ -1,4 +1,4 @@
-[gd_scene load_steps=64 format=3 uid="uid://dj2qkj8rk5w52"]
+[gd_scene load_steps=66 format=3 uid="uid://dj2qkj8rk5w52"]
 
 [ext_resource type="Script" path="res://Scripts/CameraTilt.gd" id="1_lhxop"]
 [ext_resource type="PackedScene" uid="uid://bf2sbpklqpo18" path="res://Scenes/buildplate.tscn" id="2_4vgq1"]
@@ -17,6 +17,8 @@
 [ext_resource type="ArrayMesh" uid="uid://fb6g2xeqjarb" path="res://bricks/flower.obj" id="15_lk353"]
 [ext_resource type="ArrayMesh" uid="uid://dda3sgtscu36t" path="res://bricks/ftile.obj" id="16_neg7h"]
 [ext_resource type="ArrayMesh" uid="uid://w3cxhjb85m0e" path="res://bricks/tree.obj" id="17_wvskg"]
+[ext_resource type="Script" path="res://Scripts/swatches.gd" id="18_fg52x"]
+[ext_resource type="Script" path="res://Scripts/picker.gd" id="19_vun0m"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_hrbhv"]
 sky_top_color = Color(0.239216, 0.682353, 0.917647, 1)
@@ -368,7 +370,6 @@ id = 1
 [node name="StaticBody3D" type="StaticBody3D" parent="blocks/1x2"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="blocks/1x2/StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 shape = SubResource("ConcavePolygonShape3D_s2055")
 
 [node name="1x3" type="MeshInstance3D" parent="blocks"]
@@ -481,6 +482,31 @@ id = 9
 transform = Transform3D(1, 0, 5.55112e-17, 0, 1, 0, -5.55112e-17, 0, 1, 0, 0, 0)
 shape = SubResource("ConcavePolygonShape3D_vd3qg")
 
+[node name="swatches" type="Node3D" parent="."]
+transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, -1.9962, -0.0833544, -0.426211)
+script = ExtResource("18_fg52x")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+offset_left = 4.0
+offset_top = 3.0
+offset_right = 114.0
+offset_bottom = 43.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
+layout_mode = 2
+script = ExtResource("19_vun0m")
+
+[node name="Button" type="Button" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+toggle_mode = true
+text = " Color picker "
+
+[node name="ColorPicker" type="ColorPicker" parent="PanelContainer/VBoxContainer"]
+visible = false
+layout_mode = 2
+sampler_visible = false
+color_modes_visible = false
+
 [connection signal="input_event" from="blocks/1x1/StaticBody3D" to="blocks/1x1" method="_on_static_body_3d_input_event"]
 [connection signal="input_event" from="blocks/1x2/StaticBody3D" to="blocks/1x2" method="_on_static_body_3d_input_event"]
 [connection signal="input_event" from="blocks/1x3/StaticBody3D" to="blocks/1x3" method="_on_static_body_3d_input_event"]
@@ -491,3 +517,5 @@ shape = SubResource("ConcavePolygonShape3D_vd3qg")
 [connection signal="input_event" from="blocks/1x8/StaticBody3D" to="blocks/1x8" method="_on_static_body_3d_input_event"]
 [connection signal="input_event" from="blocks/1x9/StaticBody3D" to="blocks/1x9" method="_on_static_body_3d_input_event"]
 [connection signal="input_event" from="blocks/1x10/StaticBody3D" to="blocks/1x10" method="_on_static_body_3d_input_event"]
+[connection signal="toggled" from="PanelContainer/VBoxContainer/Button" to="PanelContainer/VBoxContainer" method="_on_button_toggled"]
+[connection signal="color_changed" from="PanelContainer/VBoxContainer/ColorPicker" to="PanelContainer/VBoxContainer" method="_on_color_picker_color_changed"]

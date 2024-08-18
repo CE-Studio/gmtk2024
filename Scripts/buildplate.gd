@@ -122,11 +122,11 @@ func click_event(_camera: Node, event: InputEvent, pos: Vector3, _normal: Vector
 			nb.rot = toolrot
 			nb.material_override = StandardMaterial3D.new()
 			nb.material_override.albedo_color = Color(selColor)
-			nb.material_override.albedo_color.r += randf_range(-0.05, 0.05)
+			nb.material_override.albedo_color.r += randf_range(-0.02, 0.02)
 			nb.material_override.albedo_color.r = clampf(nb.material_override.albedo_color.r, 0, 1)
-			nb.material_override.albedo_color.g += randf_range(-0.05, 0.05)
+			nb.material_override.albedo_color.g += randf_range(-0.02, 0.02)
 			nb.material_override.albedo_color.g = clampf(nb.material_override.albedo_color.g, 0, 1)
-			nb.material_override.albedo_color.b += randf_range(-0.05, 0.05)
+			nb.material_override.albedo_color.b += randf_range(-0.02, 0.02)
 			nb.material_override.albedo_color.b = clampf(nb.material_override.albedo_color.b, 0, 1)
 			print(selColor.a)
 			if selColor.a < 1:

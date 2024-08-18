@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://bs1vwfap1p8xo"]
+[gd_scene load_steps=8 format=3 uid="uid://bs1vwfap1p8xo"]
 
 [ext_resource type="ArrayMesh" uid="uid://bx5d2vc6g4mmu" path="res://bricks/flowerbush.obj" id="1_cifl6"]
 [ext_resource type="Script" path="res://Scripts/brick.gd" id="2_pcvqd"]
@@ -12,6 +12,16 @@ data = PackedVector3Array(0.0656, 1.089, 0.3372, 0.0857, 1.0739, 0.3633, 0.12, 1
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fq82v"]
 albedo_color = Color(1, 0.309804, 0, 1)
+
+[sub_resource type="GDScript" id="GDScript_ho636"]
+script/source = "extends MeshInstance3D
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	material_override = StandardMaterial3D.new()
+	material_override.albedo_color = Color(randf(), randf(), randf())
+"
 
 [node name="2x2" type="MeshInstance3D"]
 transform = Transform3D(9.79717e-18, 0, 0.16, 0, 0.16, 0, -0.16, 0, 9.79717e-18, 0, 0, 0)
@@ -33,5 +43,6 @@ shape = SubResource("ConcavePolygonShape3D_qtc7i")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 material_override = SubResource("StandardMaterial3D_fq82v")
 mesh = ExtResource("3_7unmo")
+script = SubResource("GDScript_ho636")
 
 [connection signal="input_event" from="StaticBody3D" to="." method="_on_static_body_3d_input_event"]
