@@ -1,12 +1,17 @@
-[gd_scene load_steps=33 format=3 uid="uid://c0jim2vxnam06"]
+[gd_scene load_steps=48 format=3 uid="uid://c0jim2vxnam06"]
 
 [ext_resource type="ArrayMesh" uid="uid://c30ixpvjiulrk" path="res://Models/bench.obj" id="1_pctgq"]
 [ext_resource type="Texture2D" uid="uid://qvalf6acfkjb" path="res://Textures/BenchTexture.png" id="2_ifj6d"]
 [ext_resource type="ArrayMesh" uid="uid://d33i66sfhrr3s" path="res://Models/table.obj" id="3_5fqss"]
+[ext_resource type="ArrayMesh" uid="uid://lmeg8fuq0v8u" path="res://bricks/4x2.obj" id="4_5rhoq"]
 [ext_resource type="Texture2D" uid="uid://dwh0qi7ys5h4j" path="res://Textures/UI/CEStudioLogoLandscape.png" id="4_titdv"]
+[ext_resource type="ArrayMesh" uid="uid://d0l3b6jm4qg3f" path="res://bricks/2x2.obj" id="5_mm4ys"]
 [ext_resource type="FontFile" uid="uid://bv3wsu3egaurn" path="res://Fonts/NovaRound-Regular.ttf" id="5_yj5ua"]
+[ext_resource type="ArrayMesh" uid="uid://b6ofu8jr236ek" path="res://bricks/1x2.obj" id="6_jboxj"]
 [ext_resource type="Texture2D" uid="uid://bc4lk4lgqmmlb" path="res://Textures/UI/GMTKJam24.png" id="6_sq6b7"]
+[ext_resource type="ArrayMesh" uid="uid://dac4jvopnwni8" path="res://bricks/3x2.obj" id="7_8vviu"]
 [ext_resource type="Texture2D" uid="uid://blp8ybeipcul7" path="res://Textures/UI/Title.png" id="7_f4p1r"]
+[ext_resource type="ArrayMesh" uid="uid://crj3sdehgevjy" path="res://bricks/antenna.obj" id="8_5buhw"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_we1o5"]
 sky_top_color = Color(0.239216, 0.682353, 0.917647, 1)
@@ -91,6 +96,36 @@ roughness = 0.6
 albedo_color = Color(0.105882, 0.117647, 0.176471, 1)
 metallic = 0.1
 roughness = 0.6
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dnmd2"]
+albedo_color = Color(1, 0.211765, 0.160784, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k17gd"]
+albedo_color = Color(0, 0.678431, 0.14902, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_admvv"]
+albedo_color = Color(0, 0.403922, 0.737255, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kcofq"]
+albedo_color = Color(0, 0.403922, 0.737255, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4hrfv"]
+albedo_color = Color(1, 0.211765, 0.160784, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hjm73"]
+albedo_color = Color(0, 0.678431, 0.14902, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_llxde"]
+albedo_color = Color(1, 0.709804, 0.160784, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yk3y7"]
+albedo_color = Color(0.313726, 0.313726, 0.313726, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wrxx8"]
+albedo_color = Color(0.313726, 0.313726, 0.313726, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a14ah"]
+albedo_color = Color(0, 0.678431, 0.14902, 1)
 
 [sub_resource type="Gradient" id="Gradient_lu0o8"]
 colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1)
@@ -202,7 +237,7 @@ tracks/6/keys = {
 "times": PackedFloat64Array(0, 7.1, 12.5, 18),
 "transitions": PackedFloat64Array(1, 3, 0.3333, 1),
 "update": 0,
-"values": [Vector3(0, 0, 10), Vector3(0, 0, 10), Vector3(0, 0, 6), Vector3(0, 0, 2)]
+"values": [Vector3(0, 0, 10), Vector3(0, 0, 10), Vector3(0, 0, 5.5), Vector3(0, 0, 1)]
 }
 tracks/7/type = "value"
 tracks/7/imported = false
@@ -381,6 +416,7 @@ script = SubResource("GDScript_yb50a")
 
 [node name="Camera3D" type="Camera3D" parent="CameraGyro"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10)
+fov = 60.0
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.258819, 0.965926, 0, -0.965926, 0.258819, 0, 0, 0)
@@ -407,6 +443,58 @@ mesh = ExtResource("3_5fqss")
 surface_material_override/0 = SubResource("StandardMaterial3D_bmu0t")
 surface_material_override/1 = SubResource("StandardMaterial3D_jb6u4")
 surface_material_override/2 = SubResource("StandardMaterial3D_yt5ni")
+
+[node name="BrickGroup" type="Node3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="BrickGroup"]
+transform = Transform3D(0.0955479, 0, 0.0295058, 0, 0.1, 0, -0.0295058, 0, 0.0955479, 0.092578, -0.1, -0.192757)
+mesh = ExtResource("4_5rhoq")
+surface_material_override/0 = SubResource("StandardMaterial3D_dnmd2")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="BrickGroup"]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, -0.1, 0)
+mesh = ExtResource("5_mm4ys")
+surface_material_override/0 = SubResource("StandardMaterial3D_k17gd")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="BrickGroup"]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, -0.1, -0.1, 0)
+mesh = ExtResource("5_mm4ys")
+surface_material_override/0 = SubResource("StandardMaterial3D_admvv")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="BrickGroup"]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, -0.05, -0.04, 0)
+mesh = ExtResource("5_mm4ys")
+surface_material_override/0 = SubResource("StandardMaterial3D_kcofq")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="BrickGroup"]
+transform = Transform3D(0.0605127, 0, -0.0796129, 0, 0.1, 0, 0.0796129, 0, 0.0605127, 0.0061572, -0.1, 0.315121)
+mesh = ExtResource("6_jboxj")
+surface_material_override/0 = SubResource("StandardMaterial3D_4hrfv")
+
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="BrickGroup"]
+transform = Transform3D(0.0996677, 0, -0.00814514, 0, 0.1, 0, 0.00814514, 0, 0.0996677, -0.173885, -0.1, -0.240396)
+mesh = ExtResource("7_8vviu")
+surface_material_override/0 = SubResource("StandardMaterial3D_hjm73")
+
+[node name="MeshInstance3D7" type="MeshInstance3D" parent="BrickGroup"]
+transform = Transform3D(0.0161156, 0, 0.0986929, 0, 0.1, 0, -0.0986929, 0, 0.0161156, -0.132887, -0.1, -0.384369)
+mesh = ExtResource("7_8vviu")
+surface_material_override/0 = SubResource("StandardMaterial3D_llxde")
+
+[node name="MeshInstance3D8" type="MeshInstance3D" parent="BrickGroup"]
+transform = Transform3D(0.00336436, 0, 0.0999434, 0, 0.1, 0, -0.0999434, 0, 0.00336436, -0.356741, -0.1, 0.235925)
+mesh = ExtResource("8_5buhw")
+surface_material_override/0 = SubResource("StandardMaterial3D_yk3y7")
+
+[node name="MeshInstance3D9" type="MeshInstance3D" parent="BrickGroup"]
+transform = Transform3D(0.00336436, 0, 0.0999434, -0.0998044, -0.00527194, 0.00335968, 0.00526896, -0.0998609, -0.000177367, -0.439492, -0.0823054, 0.331729)
+mesh = ExtResource("8_5buhw")
+surface_material_override/0 = SubResource("StandardMaterial3D_wrxx8")
+
+[node name="MeshInstance3D10" type="MeshInstance3D" parent="BrickGroup"]
+transform = Transform3D(-0.00316516, -0.0297208, -0.0954288, -0.0996569, -0.00636667, 0.00528826, -0.00764735, 0.0952688, -0.0294173, -0.46936, -0.0812658, -0.0562129)
+mesh = ExtResource("8_5buhw")
+surface_material_override/0 = SubResource("StandardMaterial3D_a14ah")
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
