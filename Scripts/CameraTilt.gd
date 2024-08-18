@@ -28,8 +28,8 @@ func _process(delta):
 	rotation_degrees.y = lerpf(rotation_degrees.y, target_rot_x, delta * cam_smooth_rate)
 	var target_rot_y = lerpf(origin_rot.x - cam_range_Y, origin_rot.x + cam_range_Y, rangeY)
 	rotation_degrees.x = lerpf(rotation_degrees.x, target_rot_y, delta * cam_smooth_rate)
-	# Everything below is the zoom
-	var average_rot = (abs(rotation_degrees.x - origin_rot.x) + abs(rotation_degrees.y - origin_rot.y)) * 0.5
+	var adj_origin = Vector2(origin_rot.x - 12.5, origin_rot.y)
+	var average_rot = (abs(rotation_degrees.x - adj_origin.x) + abs(rotation_degrees.y - adj_origin.y)) * 0.5
 	if average_rot < zoom_deadzone_inner:
 		fov = cam_zoom_in
 	elif average_rot < zoom_deadzone_outer:
