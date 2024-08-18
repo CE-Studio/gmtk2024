@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=3 uid="uid://c0jim2vxnam06"]
+[gd_scene load_steps=50 format=3 uid="uid://c0jim2vxnam06"]
 
 [ext_resource type="ArrayMesh" uid="uid://c30ixpvjiulrk" path="res://Models/bench.obj" id="1_pctgq"]
 [ext_resource type="Texture2D" uid="uid://qvalf6acfkjb" path="res://Textures/BenchTexture.png" id="2_ifj6d"]
@@ -12,6 +12,8 @@
 [ext_resource type="ArrayMesh" uid="uid://dac4jvopnwni8" path="res://bricks/3x2.obj" id="7_8vviu"]
 [ext_resource type="Texture2D" uid="uid://blp8ybeipcul7" path="res://Textures/UI/Title.png" id="7_f4p1r"]
 [ext_resource type="ArrayMesh" uid="uid://crj3sdehgevjy" path="res://bricks/antenna.obj" id="8_5buhw"]
+[ext_resource type="Texture2D" uid="uid://co1fmga0x151i" path="res://Textures/UI/PlayButton.png" id="13_g25e5"]
+[ext_resource type="Texture2D" uid="uid://dyeyhvbula7kb" path="res://Textures/UI/CreditsButton.png" id="14_40303"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_we1o5"]
 sky_top_color = Color(0.239216, 0.682353, 0.917647, 1)
@@ -254,7 +256,7 @@ tracks/7/keys = {
 tracks/8/type = "value"
 tracks/8/imported = false
 tracks/8/enabled = true
-tracks/8/path = NodePath("Control/Control/Title:scale")
+tracks/8/path = NodePath("Control/TitleParent/Title:scale")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
@@ -266,7 +268,7 @@ tracks/8/keys = {
 tracks/9/type = "value"
 tracks/9/imported = false
 tracks/9/enabled = true
-tracks/9/path = NodePath("Control/Control/Title:position")
+tracks/9/path = NodePath("Control/TitleParent/Title:position")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/keys = {
@@ -274,6 +276,18 @@ tracks/9/keys = {
 "transitions": PackedFloat64Array(1, 2, 0.5, 1),
 "update": 0,
 "values": [Vector2(-108, 250), Vector2(-108, 250), Vector2(-108, 175), Vector2(-108, 100)]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("Control/ButtonParent/HBoxContainer:position")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat64Array(0, 18, 21),
+"transitions": PackedFloat64Array(1, 0.2, 1),
+"update": 0,
+"values": [Vector2(-217, 100), Vector2(-217, 100), Vector2(-217, -175)]
 }
 
 [sub_resource type="Animation" id="Animation_gudph"]
@@ -377,7 +391,7 @@ tracks/7/keys = {
 tracks/8/type = "value"
 tracks/8/imported = false
 tracks/8/enabled = true
-tracks/8/path = NodePath("Control/Control/Title:scale")
+tracks/8/path = NodePath("Control/TitleParent/Title:scale")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
@@ -389,7 +403,7 @@ tracks/8/keys = {
 tracks/9/type = "value"
 tracks/9/imported = false
 tracks/9/enabled = true
-tracks/9/path = NodePath("Control/Control/Title:position")
+tracks/9/path = NodePath("Control/TitleParent/Title:position")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/keys = {
@@ -397,6 +411,18 @@ tracks/9/keys = {
 "transitions": PackedFloat64Array(1),
 "update": 0,
 "values": [Vector2(-108, 100)]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("Control/ButtonParent/HBoxContainer:position")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat64Array(0),
+"transitions": PackedFloat64Array(1),
+"update": 0,
+"values": [Vector2(-217, -175)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_g37oa"]
@@ -568,7 +594,7 @@ layout_mode = 2
 texture = ExtResource("6_sq6b7")
 expand_mode = 5
 
-[node name="Control" type="Control" parent="Control"]
+[node name="TitleParent" type="Control" parent="Control"]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -578,7 +604,7 @@ offset_right = 20.0
 offset_bottom = 40.0
 grow_horizontal = 2
 
-[node name="Title" type="TextureRect" parent="Control/Control"]
+[node name="Title" type="TextureRect" parent="Control/TitleParent"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -595,6 +621,49 @@ scale = Vector2(2, 2)
 pivot_offset = Vector2(128, 64)
 texture = ExtResource("7_f4p1r")
 script = SubResource("GDScript_bl6hn")
+
+[node name="ButtonParent" type="Control" parent="Control"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -40.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/ButtonParent"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -237.0
+offset_top = -215.0
+offset_right = 237.0
+offset_bottom = -100.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Play" type="TextureButton" parent="Control/ButtonParent/HBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("13_g25e5")
+texture_pressed = ExtResource("13_g25e5")
+texture_hover = ExtResource("13_g25e5")
+texture_disabled = ExtResource("13_g25e5")
+texture_focused = ExtResource("13_g25e5")
+
+[node name="Credits" type="TextureButton" parent="Control/ButtonParent/HBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("14_40303")
+texture_pressed = ExtResource("14_40303")
+texture_hover = ExtResource("14_40303")
+texture_disabled = ExtResource("14_40303")
+texture_focused = ExtResource("14_40303")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
