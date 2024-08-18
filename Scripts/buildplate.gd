@@ -12,6 +12,10 @@ static var parts:Array[Brick] = [
 	preload("res://bricks/scn/3x2.tscn").instantiate(),
 	preload("res://bricks/scn/4x2.tscn").instantiate(),
 	preload("res://bricks/scn/antenna.tscn").instantiate(),
+	preload("res://bricks/scn/cyl.tscn").instantiate(),
+	preload("res://bricks/scn/flowerbush.tscn").instantiate(),
+	preload("res://bricks/scn/ftile.tscn").instantiate(),
+	preload("res://bricks/scn/tree.tscn").instantiate(),
 ]
 
 
@@ -69,7 +73,7 @@ func _ready() -> void:
 			_area[-1].append([])
 			for z in 25:
 				_area[-1][-1].append(false)
-	setBrick(1)
+	setBrick(0)
 
 
 func setBrick(id:int) -> void:

@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://bx5d2vc6g4mmu"
+path="res://.godot/imported/flowerbush.obj-d609700a587ed8f5c207fd89cba89233.mesh"
+
+[deps]
+
+files=["res://.godot/imported/flowerbush.obj-d609700a587ed8f5c207fd89cba89233.mesh"]
+
+source_file="res://bricks/flowerbush.obj"
+dest_files=["res://.godot/imported/flowerbush.obj-d609700a587ed8f5c207fd89cba89233.mesh", "res://.godot/imported/flowerbush.obj-d609700a587ed8f5c207fd89cba89233.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false
