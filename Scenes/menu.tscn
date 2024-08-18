@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=3 uid="uid://c0jim2vxnam06"]
+[gd_scene load_steps=51 format=3 uid="uid://c0jim2vxnam06"]
 
 [ext_resource type="ArrayMesh" uid="uid://c30ixpvjiulrk" path="res://Models/bench.obj" id="1_pctgq"]
 [ext_resource type="Texture2D" uid="uid://qvalf6acfkjb" path="res://Textures/BenchTexture.png" id="2_ifj6d"]
@@ -12,6 +12,7 @@
 [ext_resource type="ArrayMesh" uid="uid://dac4jvopnwni8" path="res://bricks/3x2.obj" id="7_8vviu"]
 [ext_resource type="Texture2D" uid="uid://blp8ybeipcul7" path="res://Textures/UI/Title.png" id="7_f4p1r"]
 [ext_resource type="ArrayMesh" uid="uid://crj3sdehgevjy" path="res://bricks/antenna.obj" id="8_5buhw"]
+[ext_resource type="Script" path="res://Scripts/MainMenu.gd" id="9_6apg3"]
 [ext_resource type="Texture2D" uid="uid://co1fmga0x151i" path="res://Textures/UI/PlayButton.png" id="13_g25e5"]
 [ext_resource type="Texture2D" uid="uid://dyeyhvbula7kb" path="res://Textures/UI/CreditsButton.png" id="14_40303"]
 
@@ -129,12 +130,6 @@ albedo_color = Color(0.313726, 0.313726, 0.313726, 1)
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a14ah"]
 albedo_color = Color(0, 0.678431, 0.14902, 1)
 
-[sub_resource type="Gradient" id="Gradient_lu0o8"]
-colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_lp3dv"]
-gradient = SubResource("Gradient_lu0o8")
-
 [sub_resource type="GDScript" id="GDScript_bl6hn"]
 resource_name = "TitleSway"
 script/source = "extends TextureRect
@@ -153,6 +148,12 @@ func _process(delta):
 	cycle_time += delta * cycle_speed
 	rotation = sin(cycle_time) * cycle_amplitude
 "
+
+[sub_resource type="Gradient" id="Gradient_lu0o8"]
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_lp3dv"]
+gradient = SubResource("Gradient_lu0o8")
 
 [sub_resource type="Animation" id="Animation_dg3a7"]
 resource_name = "IntroCinematic"
@@ -530,69 +531,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-
-[node name="Black" type="TextureRect" parent="Control"]
-visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = SubResource("GradientTexture1D_lp3dv")
-
-[node name="DevSplash" type="VBoxContainer" parent="Control"]
-visible = false
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -156.0
-offset_top = -106.0
-offset_right = 156.0
-offset_bottom = 106.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="TextureRect" type="TextureRect" parent="Control/DevSplash"]
-layout_mode = 2
-texture = ExtResource("4_titdv")
-
-[node name="Label" type="Label" parent="Control/DevSplash"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("5_yj5ua")
-theme_override_font_sizes/font_size = 64
-text = "presents..."
-horizontal_alignment = 1
-
-[node name="JamSplash" type="VBoxContainer" parent="Control"]
-visible = false
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -156.0
-offset_top = -106.0
-offset_right = 156.0
-offset_bottom = 106.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Label" type="Label" parent="Control/JamSplash"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("5_yj5ua")
-theme_override_font_sizes/font_size = 64
-text = "A game made for"
-horizontal_alignment = 1
-
-[node name="TextureRect" type="TextureRect" parent="Control/JamSplash"]
-layout_mode = 2
-texture = ExtResource("6_sq6b7")
-expand_mode = 5
+script = ExtResource("9_6apg3")
 
 [node name="TitleParent" type="Control" parent="Control"]
 layout_mode = 1
@@ -664,6 +603,69 @@ texture_pressed = ExtResource("14_40303")
 texture_hover = ExtResource("14_40303")
 texture_disabled = ExtResource("14_40303")
 texture_focused = ExtResource("14_40303")
+
+[node name="Black" type="TextureRect" parent="Control"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture1D_lp3dv")
+
+[node name="DevSplash" type="VBoxContainer" parent="Control"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -240.0
+offset_top = -141.0
+offset_right = 240.0
+offset_bottom = 141.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="Control/DevSplash"]
+layout_mode = 2
+texture = ExtResource("4_titdv")
+
+[node name="Label" type="Label" parent="Control/DevSplash"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("5_yj5ua")
+theme_override_font_sizes/font_size = 64
+text = "presents..."
+horizontal_alignment = 1
+
+[node name="JamSplash" type="VBoxContainer" parent="Control"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -260.5
+offset_top = -106.0
+offset_right = 260.5
+offset_bottom = 106.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Control/JamSplash"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("5_yj5ua")
+theme_override_font_sizes/font_size = 64
+text = "A game made for"
+horizontal_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="Control/JamSplash"]
+layout_mode = 2
+texture = ExtResource("6_sq6b7")
+expand_mode = 5
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
