@@ -1,0 +1,502 @@
+[gd_scene load_steps=33 format=3 uid="uid://c0jim2vxnam06"]
+
+[ext_resource type="ArrayMesh" uid="uid://c30ixpvjiulrk" path="res://Models/bench.obj" id="1_pctgq"]
+[ext_resource type="Texture2D" uid="uid://qvalf6acfkjb" path="res://Textures/BenchTexture.png" id="2_ifj6d"]
+[ext_resource type="ArrayMesh" uid="uid://d33i66sfhrr3s" path="res://Models/table.obj" id="3_5fqss"]
+[ext_resource type="Texture2D" uid="uid://dwh0qi7ys5h4j" path="res://Textures/UI/CEStudioLogoLandscape.png" id="4_titdv"]
+[ext_resource type="FontFile" uid="uid://bv3wsu3egaurn" path="res://Fonts/NovaRound-Regular.ttf" id="5_yj5ua"]
+[ext_resource type="Texture2D" uid="uid://bc4lk4lgqmmlb" path="res://Textures/UI/GMTKJam24.png" id="6_sq6b7"]
+[ext_resource type="Texture2D" uid="uid://blp8ybeipcul7" path="res://Textures/UI/Title.png" id="7_f4p1r"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_we1o5"]
+sky_top_color = Color(0.239216, 0.682353, 0.917647, 1)
+sky_horizon_color = Color(0.298039, 0.439216, 0.882353, 1)
+sky_energy_multiplier = 1.5
+ground_horizon_color = Color(0.823529, 0.662745, 0.627451, 1)
+ground_curve = 0.05
+sun_curve = 0.764736
+
+[sub_resource type="Sky" id="Sky_vg1yd"]
+sky_material = SubResource("ProceduralSkyMaterial_we1o5")
+
+[sub_resource type="Environment" id="Environment_2rprx"]
+background_mode = 2
+sky = SubResource("Sky_vg1yd")
+ambient_light_source = 3
+ambient_light_color = Color(0.85098, 0.85098, 0.85098, 1)
+ambient_light_sky_contribution = 0.0
+
+[sub_resource type="GDScript" id="GDScript_yb50a"]
+resource_name = "MenuCamSpin"
+script/source = "extends Node3D
+
+
+const cam_spin:float = 0.1
+
+
+func _ready():
+	pass # Replace with function body.
+
+
+func _process(delta):
+	rotate_y(cam_spin * delta)
+"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6kbvl"]
+albedo_texture = ExtResource("2_ifj6d")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qjivu"]
+albedo_texture = ExtResource("2_ifj6d")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xcger"]
+albedo_texture = ExtResource("2_ifj6d")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_j36lu"]
+albedo_texture = ExtResource("2_ifj6d")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ypff5"]
+albedo_texture = ExtResource("2_ifj6d")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dpqgr"]
+albedo_texture = ExtResource("2_ifj6d")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_euvec"]
+albedo_texture = ExtResource("2_ifj6d")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_v8x6d"]
+albedo_texture = ExtResource("2_ifj6d")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_km5os"]
+albedo_texture = ExtResource("2_ifj6d")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_flvyo"]
+albedo_texture = ExtResource("2_ifj6d")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l4dm8"]
+albedo_texture = ExtResource("2_ifj6d")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2gph3"]
+albedo_texture = ExtResource("2_ifj6d")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bmu0t"]
+albedo_color = Color(0.658824, 0.658824, 0.658824, 1)
+roughness = 0.8
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jb6u4"]
+albedo_color = Color(0.105882, 0.117647, 0.176471, 1)
+metallic = 0.1
+roughness = 0.6
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yt5ni"]
+albedo_color = Color(0.105882, 0.117647, 0.176471, 1)
+metallic = 0.1
+roughness = 0.6
+
+[sub_resource type="Gradient" id="Gradient_lu0o8"]
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_lp3dv"]
+gradient = SubResource("Gradient_lu0o8")
+
+[sub_resource type="GDScript" id="GDScript_bl6hn"]
+resource_name = "TitleSway"
+script/source = "extends TextureRect
+
+
+const cycle_amplitude:float = 0.15
+const cycle_speed:float = 0.75
+var cycle_time:float = 0.0
+
+
+func _ready():
+	pass # Replace with function body.
+
+
+func _process(delta):
+	cycle_time += delta * cycle_speed
+	rotation = sin(cycle_time) * cycle_amplitude
+"
+
+[sub_resource type="Animation" id="Animation_dg3a7"]
+resource_name = "IntroCinematic"
+length = 30.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Control/DevSplash:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat64Array(0.5, 5.5),
+"transitions": PackedFloat64Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Control/DevSplash:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat64Array(0.5, 1.5, 4.5, 5.5),
+"transitions": PackedFloat64Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Control/JamSplash:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat64Array(6.5, 11.5),
+"transitions": PackedFloat64Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Control/JamSplash:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat64Array(6.5, 7.5, 10.5, 11.5),
+"transitions": PackedFloat64Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Control/Black:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat64Array(2, 6),
+"transitions": PackedFloat64Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("CameraGyro/Camera3D:rotation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat64Array(0, 2, 15),
+"transitions": PackedFloat64Array(1, 0.4, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(1.5708, 0, 0), Vector3(0, 0, 0)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("CameraGyro/Camera3D:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat64Array(0, 7.1, 12.5, 18),
+"transitions": PackedFloat64Array(1, 3, 0.3333, 1),
+"update": 0,
+"values": [Vector3(0, 0, 10), Vector3(0, 0, 10), Vector3(0, 0, 6), Vector3(0, 0, 2)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Control/Black:visible")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat64Array(0, 6),
+"transitions": PackedFloat64Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Control/Title:scale")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat64Array(0, 13, 16, 17, 18, 19),
+"transitions": PackedFloat64Array(1, 0.5, 0.450625, 2, 0.5, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(1e-05, 1e-05), Vector2(3, 3), Vector2(3, 3), Vector2(2.5, 2.5), Vector2(2, 2)]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("Control/Title:position")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat64Array(0, 17, 18, 19),
+"transitions": PackedFloat64Array(1, 2, 0.5, 1),
+"update": 0,
+"values": [Vector2(448, 250), Vector2(448, 250), Vector2(448, 175), Vector2(448, 100)]
+}
+
+[sub_resource type="Animation" id="Animation_gudph"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Control/DevSplash:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat64Array(0),
+"transitions": PackedFloat64Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Control/DevSplash:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat64Array(0),
+"transitions": PackedFloat64Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Control/JamSplash:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat64Array(0),
+"transitions": PackedFloat64Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Control/JamSplash:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat64Array(0),
+"transitions": PackedFloat64Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Control/Black:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat64Array(0),
+"transitions": PackedFloat64Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("CameraGyro/Camera3D:rotation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat64Array(0),
+"transitions": PackedFloat64Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("CameraGyro/Camera3D:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat64Array(0),
+"transitions": PackedFloat64Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 10)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Control/Black:visible")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat64Array(0),
+"transitions": PackedFloat64Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Control/Title:scale")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat64Array(0),
+"transitions": PackedFloat64Array(1),
+"update": 0,
+"values": [Vector2(2, 2)]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("Control/Title:position")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat64Array(0),
+"transitions": PackedFloat64Array(1),
+"update": 0,
+"values": [Vector2(448, 100)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_g37oa"]
+_data = {
+"IntroCinematic": SubResource("Animation_dg3a7"),
+"RESET": SubResource("Animation_gudph")
+}
+
+[node name="Menu" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_2rprx")
+
+[node name="CameraGyro" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 0, 0)
+script = SubResource("GDScript_yb50a")
+
+[node name="Camera3D" type="Camera3D" parent="CameraGyro"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.258819, 0.965926, 0, -0.965926, 0.258819, 0, 0, 0)
+
+[node name="Bench" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.12055e-16, 0, 1.83, 0, 1.83, 0, -1.83, 0, 1.12055e-16, 0, -1.60773, 2)
+mesh = ExtResource("1_pctgq")
+surface_material_override/0 = SubResource("StandardMaterial3D_6kbvl")
+surface_material_override/1 = SubResource("StandardMaterial3D_qjivu")
+surface_material_override/2 = SubResource("StandardMaterial3D_xcger")
+surface_material_override/3 = SubResource("StandardMaterial3D_j36lu")
+surface_material_override/4 = SubResource("StandardMaterial3D_ypff5")
+surface_material_override/5 = SubResource("StandardMaterial3D_dpqgr")
+surface_material_override/6 = SubResource("StandardMaterial3D_euvec")
+surface_material_override/7 = SubResource("StandardMaterial3D_v8x6d")
+surface_material_override/8 = SubResource("StandardMaterial3D_km5os")
+surface_material_override/9 = SubResource("StandardMaterial3D_flvyo")
+surface_material_override/10 = SubResource("StandardMaterial3D_l4dm8")
+surface_material_override/11 = SubResource("StandardMaterial3D_2gph3")
+
+[node name="Bench2" type="MeshInstance3D" parent="."]
+transform = Transform3D(-1.095, 0, 1.34099e-16, 0, 1.095, 0, -1.34099e-16, 0, -1.095, 0, -1.60773, -0.0124135)
+mesh = ExtResource("3_5fqss")
+surface_material_override/0 = SubResource("StandardMaterial3D_bmu0t")
+surface_material_override/1 = SubResource("StandardMaterial3D_jb6u4")
+surface_material_override/2 = SubResource("StandardMaterial3D_yt5ni")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Black" type="TextureRect" parent="Control"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture1D_lp3dv")
+
+[node name="DevSplash" type="VBoxContainer" parent="Control"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -156.0
+offset_top = -106.0
+offset_right = 156.0
+offset_bottom = 106.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="Control/DevSplash"]
+layout_mode = 2
+texture = ExtResource("4_titdv")
+
+[node name="Label" type="Label" parent="Control/DevSplash"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("5_yj5ua")
+theme_override_font_sizes/font_size = 64
+text = "presents..."
+horizontal_alignment = 1
+
+[node name="JamSplash" type="VBoxContainer" parent="Control"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -156.0
+offset_top = -106.0
+offset_right = 156.0
+offset_bottom = 106.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Control/JamSplash"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("5_yj5ua")
+theme_override_font_sizes/font_size = 64
+text = "A game made for"
+horizontal_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="Control/JamSplash"]
+layout_mode = 2
+texture = ExtResource("6_sq6b7")
+expand_mode = 5
+
+[node name="Title" type="TextureRect" parent="Control"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -128.0
+offset_top = 100.0
+offset_right = 128.0
+offset_bottom = 228.0
+grow_horizontal = 2
+scale = Vector2(2, 2)
+pivot_offset = Vector2(128, 64)
+texture = ExtResource("7_f4p1r")
+script = SubResource("GDScript_bl6hn")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_g37oa")
+}
+autoplay = "IntroCinematic"
