@@ -101,8 +101,6 @@ transform = Transform3D(0.16, 0, 0, 0, 0.16, 0, 0, 0, 0.16, 0, 0, 0)
 material_override = SubResource("StandardMaterial3D_4e2o7")
 mesh = ExtResource("2_4rdvr")
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
-
 [node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.25, 0, 1.25)
 material_override = SubResource("StandardMaterial3D_vjybu")
