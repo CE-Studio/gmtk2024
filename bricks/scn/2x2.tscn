@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://cruxlmvxp8vkb"]
+
+[ext_resource type="ArrayMesh" uid="uid://d0l3b6jm4qg3f" path="res://bricks/2x2.obj" id="1_na1u2"]
+[ext_resource type="Script" path="res://Scripts/brick.gd" id="2_600vt"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_n0cfm"]
+points = PackedVector3Array(-0.5, 0, -0.5, -0.5, 0, 0.5, 0.5, 0, -0.5, 0.5, 0, 0.5)
+
+[node name="2x2" type="MeshInstance3D"]
+transform = Transform3D(9.79717e-18, 0, 0.16, 0, 0.16, 0, -0.16, 0, 9.79717e-18, 0, 0, 0)
+mesh = ExtResource("1_na1u2")
+script = ExtResource("2_600vt")
+size = Vector3i(2, 1, 2)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.251663, 0.6005, -0.248804)
+shape = SubResource("ConvexPolygonShape3D_n0cfm")
