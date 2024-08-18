@@ -11,6 +11,7 @@ const zoom_deadzone_outer:float = 15
 
 
 var origin_rot:Vector3
+var fovtarg:float = 0
 
 
 func _ready():
@@ -31,8 +32,9 @@ func _process(delta):
 	var adj_origin = Vector2(origin_rot.x - 12.5, origin_rot.y)
 	var average_rot = (abs(rotation_degrees.x - adj_origin.x) + abs(rotation_degrees.y - adj_origin.y)) * 0.5
 	if average_rot < zoom_deadzone_inner:
-		fov = cam_zoom_in
+		fovtarg = cam_zoom_in
 	elif average_rot < zoom_deadzone_outer:
-		fov = lerp(cam_zoom_in, cam_zoom_out, inverse_lerp(zoom_deadzone_inner, zoom_deadzone_outer, average_rot))
+		fovtarg = lerp(cam_zoom_in, cam_zoom_out, inverse_lerp(zoom_deadzone_inner, zoom_deadzone_outer, average_rot))
 	else:
-		fov = cam_zoom_out
+		fovtarg = cam_zoom_out
+	fov = lerpf(fov, fovtarg, delta * 3)
