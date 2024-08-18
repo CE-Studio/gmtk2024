@@ -3,7 +3,7 @@ class_name BuildPlate
 
 
 static var _area:Array = []
-
+static var instance:BuildPlate
 
 static var parts:Array[Brick] = [
 	preload("res://bricks/scn/2x2.tscn").instantiate()
@@ -24,11 +24,21 @@ var toolrot:int = 0
 static func getpos(pos:Vector3i) -> bool:
 	if (pos.x > 24) or (pos.x < 0):
 		return true
-	if (pos.y > 49) or (pos.x < 0):
+	if (pos.y > 49) or (pos.y < 0):
 		return true
-	if (pos.z > 24) or (pos.x < 0):
+	if (pos.z > 24) or (pos.z < 0):
 		return true
 	return _area[pos.x][pos.y][pos.z]
+
+
+static func setpos(pos:Vector3i, f:bool) -> void:
+	if (pos.x > 24) or (pos.x < 0):
+		return
+	if (pos.y > 49) or (pos.y < 0):
+		return
+	if (pos.z > 24) or (pos.z < 0):
+		return
+	_area[pos.x][pos.y][pos.z] = f
 
 
 static func posConvert(pos:Vector3) -> Vector3i:
@@ -46,6 +56,7 @@ static func unConvert(pos:Vector3i) -> Vector3:
 
 
 func _ready() -> void:
+	instance = self
 	for x in 25:
 		_area.append([])
 		for y in 50:
@@ -69,6 +80,17 @@ func _process(_delta: float) -> void:
 	rotate_y(_rotspeed * _delta)
 	hlight.position = hlight.position.lerp(htargpos, clampf(_delta * 20, 0, 1))
 	hlight.rotation_degrees.y = -90 + (toolrot * 90)
+
+
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("game_brick_ccw"):
+		toolrot += 1
+		if toolrot >= 4:
+			toolrot = 0
+	elif event.is_action_pressed("game_brick_cw"):
+		toolrot -= 1
+		if toolrot < 0:
+			toolrot = 3
 
 
 func click_event(_camera: Node, event: InputEvent, pos: Vector3, _normal: Vector3, _shape_idx: int) -> void:
