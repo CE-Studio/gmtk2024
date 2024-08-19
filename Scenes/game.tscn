@@ -1,4 +1,4 @@
-[gd_scene load_steps=70 format=3 uid="uid://dj2qkj8rk5w52"]
+[gd_scene load_steps=71 format=3 uid="uid://dj2qkj8rk5w52"]
 
 [ext_resource type="Script" path="res://Scripts/CameraTilt.gd" id="1_lhxop"]
 [ext_resource type="PackedScene" uid="uid://bf2sbpklqpo18" path="res://Scenes/buildplate.tscn" id="2_4vgq1"]
@@ -21,6 +21,7 @@
 [ext_resource type="Script" path="res://Scripts/picker.gd" id="19_vun0m"]
 [ext_resource type="ArrayMesh" uid="uid://vbpfxlueyl0a" path="res://Models/car.obj" id="20_7jjcv"]
 [ext_resource type="ArrayMesh" uid="uid://kocqyi8j252j" path="res://Models/ground.obj" id="21_prdlg"]
+[ext_resource type="ArrayMesh" uid="uid://6h7sruhp52no" path="res://Models/road.obj" id="22_gt2xr"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_hrbhv"]
 sky_top_color = Color(0.239216, 0.682353, 0.917647, 1)
@@ -526,6 +527,9 @@ mesh = ExtResource("20_7jjcv")
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
 mesh = ExtResource("21_prdlg")
 surface_material_override/0 = SubResource("StandardMaterial3D_p1wdt")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+mesh = ExtResource("22_gt2xr")
 
 [connection signal="input_event" from="blocks/1x1/StaticBody3D" to="blocks/1x1" method="_on_static_body_3d_input_event"]
 [connection signal="input_event" from="blocks/1x2/StaticBody3D" to="blocks/1x2" method="_on_static_body_3d_input_event"]
