@@ -1,7 +1,7 @@
 extends Control
 
 
-const fade_amount:float = 15.0
+const fade_amount:float = 4.0
 var credits_open:bool = false
 
 
@@ -13,21 +13,23 @@ func _ready():
 
 
 func _process(delta):
-	if InputEventMouseButton and credits_open:
-		credits_open = false
 	if credits_open:
-		credits.modulate.a = lerp(0.0, 1.0, credits.modulate.a + (delta * fade_amount))
+		credits.modulate.a = lerp(credits.modulate.a, 1.0, delta * fade_amount)
 	else:
-		credits.modulate.a = lerp(0.0, 1.0, credits.modulate.a - (delta * fade_amount))
+		credits.modulate.a = lerp(credits.modulate.a, 0.0, delta * fade_amount)
 
 
 func on_play_button():
-	print("Play!")
 	if !credits_open:
-		pass
+		get_tree().change_scene_to_file("res://Scenes/game.tscn")
 
 
 func on_credits_button():
-	print("Credits!")
 	credits_open = true
+	credits.visible = true
+	credits.modulate.a = 0.0
 
+
+func on_credits_return():
+	credits.visible = false
+	credits_open = false

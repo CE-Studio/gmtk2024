@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=3 uid="uid://c0jim2vxnam06"]
+[gd_scene load_steps=53 format=3 uid="uid://c0jim2vxnam06"]
 
 [ext_resource type="ArrayMesh" uid="uid://c30ixpvjiulrk" path="res://Models/bench.obj" id="1_pctgq"]
 [ext_resource type="Texture2D" uid="uid://qvalf6acfkjb" path="res://Textures/BenchTexture.png" id="2_ifj6d"]
@@ -149,11 +149,14 @@ func _process(delta):
 	rotation = sin(cycle_time) * cycle_amplitude
 "
 
+[sub_resource type="Gradient" id="Gradient_2owxv"]
+colors = PackedColorArray(0, 0, 0, 0.588235, 0, 0, 0, 0.588235)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_nc0gi"]
+gradient = SubResource("Gradient_2owxv")
+
 [sub_resource type="Gradient" id="Gradient_lu0o8"]
 colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_k41mj"]
-gradient = SubResource("Gradient_lu0o8")
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_lp3dv"]
 gradient = SubResource("Gradient_lu0o8")
@@ -610,7 +613,7 @@ texture_disabled = ExtResource("14_40303")
 texture_focused = ExtResource("14_40303")
 
 [node name="CreditsParent" type="TextureRect" parent="Control"]
-modulate = Color(1, 1, 1, 0)
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -618,7 +621,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-texture = SubResource("GradientTexture1D_k41mj")
+texture = SubResource("GradientTexture1D_nc0gi")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Control/CreditsParent"]
 layout_mode = 1
@@ -634,12 +637,64 @@ offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Label" type="Label" parent="Control/CreditsParent/VBoxContainer"]
+[node name="Header" type="Label" parent="Control/CreditsParent/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("5_yj5ua")
+theme_override_font_sizes/font_size = 64
+text = "Credits"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="Control/CreditsParent/VBoxContainer"]
+layout_mode = 2
+
+[node name="Clarence" type="HBoxContainer" parent="Control/CreditsParent/VBoxContainer"]
+layout_mode = 2
+
+[node name="Left" type="Label" parent="Control/CreditsParent/VBoxContainer/Clarence"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("5_yj5ua")
+theme_override_font_sizes/font_size = 48
+text = "Clarence"
+horizontal_alignment = 1
+
+[node name="VSeparator" type="VSeparator" parent="Control/CreditsParent/VBoxContainer/Clarence"]
+layout_mode = 2
+
+[node name="Right" type="Label" parent="Control/CreditsParent/VBoxContainer/Clarence"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("5_yj5ua")
+theme_override_font_sizes/font_size = 48
+text = "Game concept, programming,
+some modeling"
+
+[node name="HSeparator2" type="HSeparator" parent="Control/CreditsParent/VBoxContainer"]
+layout_mode = 2
+
+[node name="Epsilon" type="HBoxContainer" parent="Control/CreditsParent/VBoxContainer"]
+layout_mode = 2
+
+[node name="Left" type="Label" parent="Control/CreditsParent/VBoxContainer/Epsilon"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("5_yj5ua")
+theme_override_font_sizes/font_size = 48
+text = "Epsilon"
+horizontal_alignment = 1
+
+[node name="VSeparator" type="VSeparator" parent="Control/CreditsParent/VBoxContainer/Epsilon"]
+layout_mode = 2
+
+[node name="Right" type="Label" parent="Control/CreditsParent/VBoxContainer/Epsilon"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("5_yj5ua")
+theme_override_font_sizes/font_size = 48
+text = "Modeling and texturing, menu
+design, camera"
+
+[node name="Button" type="Button" parent="Control/CreditsParent/VBoxContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("5_yj5ua")
 theme_override_font_sizes/font_size = 32
-text = "Credits go here!
-Click anywhere to go back"
+text = "Click to return"
 
 [node name="Black" type="TextureRect" parent="Control"]
 visible = false
@@ -714,3 +769,4 @@ autoplay = "IntroCinematic"
 
 [connection signal="pressed" from="Control/ButtonParent/HBoxContainer/Play" to="Control" method="on_play_button"]
 [connection signal="pressed" from="Control/ButtonParent/HBoxContainer/Credits" to="Control" method="on_credits_button"]
+[connection signal="pressed" from="Control/CreditsParent/VBoxContainer/Button" to="Control" method="on_credits_return"]
