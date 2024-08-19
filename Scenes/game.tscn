@@ -1,4 +1,4 @@
-[gd_scene load_steps=68 format=3 uid="uid://dj2qkj8rk5w52"]
+[gd_scene load_steps=70 format=3 uid="uid://dj2qkj8rk5w52"]
 
 [ext_resource type="Script" path="res://Scripts/CameraTilt.gd" id="1_lhxop"]
 [ext_resource type="PackedScene" uid="uid://bf2sbpklqpo18" path="res://Scenes/buildplate.tscn" id="2_4vgq1"]
@@ -20,6 +20,7 @@
 [ext_resource type="Script" path="res://Scripts/swatches.gd" id="18_fg52x"]
 [ext_resource type="Script" path="res://Scripts/picker.gd" id="19_vun0m"]
 [ext_resource type="ArrayMesh" uid="uid://vbpfxlueyl0a" path="res://Models/car.obj" id="20_7jjcv"]
+[ext_resource type="ArrayMesh" uid="uid://kocqyi8j252j" path="res://Models/ground.obj" id="21_prdlg"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_hrbhv"]
 sky_top_color = Color(0.239216, 0.682353, 0.917647, 1)
@@ -312,6 +313,9 @@ data = PackedVector3Array(0.1528, 0.1011, -0.7385, 0.1528, 0, -0.7385, 0.25, 0.1
 [sub_resource type="PlaneMesh" id="PlaneMesh_j8akp"]
 size = Vector2(100, 100)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_p1wdt"]
+albedo_color = Color(0.0901961, 0.356863, 0.027451, 1)
+
 [node name="Game" type="Node3D"]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
@@ -518,6 +522,10 @@ mesh = SubResource("PlaneMesh_j8akp")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="MeshInstance3D"]
 transform = Transform3D(1.245, 0, 0, 0, 1.245, 0, 0, 0, 1.245, 0, 0, 0)
 mesh = ExtResource("20_7jjcv")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+mesh = ExtResource("21_prdlg")
+surface_material_override/0 = SubResource("StandardMaterial3D_p1wdt")
 
 [connection signal="input_event" from="blocks/1x1/StaticBody3D" to="blocks/1x1" method="_on_static_body_3d_input_event"]
 [connection signal="input_event" from="blocks/1x2/StaticBody3D" to="blocks/1x2" method="_on_static_body_3d_input_event"]
