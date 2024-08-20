@@ -4,6 +4,7 @@ class_name BuildPlate
 
 static var _area:Array = []
 static var instance:BuildPlate
+static var accuracy:float = 0
 
 static var parts:Array[Brick] = [
 	preload("res://bricks/scn/1x1.tscn").instantiate(),
@@ -120,6 +121,24 @@ func _unhandled_input(event: InputEvent) -> void:
 			assert(a.name == b.name)
 			if a.is_colliding() != b.is_colliding():
 				print("mismatch at " + a.name)
+
+
+func recalc() -> void:
+	var correct:int = 0
+	var incorrect:int = 0
+	for i in $rays.get_child_count():
+		var a:RayCast3D = $rays.get_child(i)
+		var b:RayCast3D = $"../pad/rays".get_child(i)
+		a.force_raycast_update()
+		b.force_raycast_update()
+		if a.is_colliding() == b.is_colliding():
+			if b.is_colliding():
+				correct += 1
+		else:
+			incorrect += 1
+	accuracy = (correct / float(correct + incorrect)) * 100
+	print(correct, " ", incorrect)
+	$"../Label".text = "Accuracy: " + str(accuracy) + "%"
 
 
 func click_event(_camera: Node, event: InputEvent, pos: Vector3, _normal: Vector3, _shape_idx: int) -> void:
