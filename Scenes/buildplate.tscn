@@ -49,7 +49,6 @@ void fragment() {
 
 }
 "
-graph_offset = Vector2(-397.625, -69.4801)
 nodes/fragment/2/node = SubResource("VisualShaderNodeTexture_0fw5k")
 nodes/fragment/2/position = Vector2(0, 160)
 nodes/fragment/3/node = SubResource("VisualShaderNodeVectorOp_c0tbu")
@@ -200,5 +199,7 @@ mesh = SubResource("PlaneMesh_5ymlp")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.25, 0, 1.25)
 material_override = SubResource("StandardMaterial3D_vjybu")
 mesh = SubResource("PlaneMesh_5ymlp")
+
+[node name="rays" type="Node3D" parent="."]
 
 [connection signal="input_event" from="StaticBody3D" to="." method="click_event"]

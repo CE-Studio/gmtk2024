@@ -19,7 +19,7 @@
 [ext_resource type="ArrayMesh" uid="uid://w3cxhjb85m0e" path="res://bricks/tree.obj" id="17_wvskg"]
 [ext_resource type="Script" path="res://Scripts/swatches.gd" id="18_fg52x"]
 [ext_resource type="Script" path="res://Scripts/picker.gd" id="19_vun0m"]
-[ext_resource type="ArrayMesh" uid="uid://vbpfxlueyl0a" path="res://Models/car.obj" id="20_7jjcv"]
+[ext_resource type="Script" path="res://Scripts/rays.gd" id="20_2rtpt"]
 [ext_resource type="ArrayMesh" uid="uid://kocqyi8j252j" path="res://Models/ground.obj" id="21_prdlg"]
 [ext_resource type="ArrayMesh" uid="uid://6h7sruhp52no" path="res://Models/road.obj" id="22_gt2xr"]
 
@@ -516,13 +516,12 @@ layout_mode = 2
 sampler_visible = false
 color_modes_visible = false
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+[node name="pad" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -52.0623, -172.756)
 mesh = SubResource("PlaneMesh_j8akp")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="MeshInstance3D"]
-transform = Transform3D(1.245, 0, 0, 0, 1.245, 0, 0, 0, 1.245, 0, 0, 0)
-mesh = ExtResource("20_7jjcv")
+[node name="rays" type="Node3D" parent="pad"]
+script = ExtResource("20_2rtpt")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
 mesh = ExtResource("21_prdlg")
@@ -530,6 +529,9 @@ surface_material_override/0 = SubResource("StandardMaterial3D_p1wdt")
 
 [node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
 mesh = ExtResource("22_gt2xr")
+
+[node name="Camera3D2" type="Camera3D" parent="."]
+transform = Transform3D(0.442289, -0.382578, 0.811181, 0, 0.904455, 0.426569, -0.896873, -0.188667, 0.40003, 75.6756, -22.7373, -113.581)
 
 [connection signal="input_event" from="blocks/1x1/StaticBody3D" to="blocks/1x1" method="_on_static_body_3d_input_event"]
 [connection signal="input_event" from="blocks/1x2/StaticBody3D" to="blocks/1x2" method="_on_static_body_3d_input_event"]
