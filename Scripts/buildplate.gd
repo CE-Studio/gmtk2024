@@ -8,6 +8,7 @@ static var accuracy:float = 0
 static var lvl:int = 0
 static var levels:Array[PackedScene] = [
 	preload("res://Scenes/buildings/building1.tscn"),
+	preload("res://Scenes/buildings/building2.tscn"),
 ]
 
 static var parts:Array[Brick] = [
