@@ -75,6 +75,7 @@ static func unConvert(pos:Vector3i) -> Vector3:
 func _ready() -> void:
 	instance = self
 	$"../pad".add_child.call_deferred(levels[lvl].instantiate())
+	_area = []
 	for x in 25:
 		_area.append([])
 		for y in 50:
