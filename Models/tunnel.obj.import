@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://crhvnwml8y5y2"
+path="res://.godot/imported/tunnel.obj-e66f0d83c6f1fb0357e410bafc3d1ecb.mesh"
+
+[deps]
+
+files=["res://.godot/imported/tunnel.obj-e66f0d83c6f1fb0357e410bafc3d1ecb.mesh"]
+
+source_file="res://Models/tunnel.obj"
+dest_files=["res://.godot/imported/tunnel.obj-e66f0d83c6f1fb0357e410bafc3d1ecb.mesh", "res://.godot/imported/tunnel.obj-e66f0d83c6f1fb0357e410bafc3d1ecb.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false
