@@ -17,5 +17,4 @@ func _ready() -> void:
 					add_child(i)
 					i.position.x = (pos % 10) / 10.0
 					i.position.z = floor(pos / 10) / 10.0
-					print(i.position)
 					pos += 1

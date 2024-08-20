@@ -74,6 +74,15 @@ func _ready() -> void:
 			for z in 25:
 				_area[-1][-1].append(false)
 	setBrick(0)
+	var rp = $rays
+	for x in 25:
+		for y in 50:
+			var h = RayCast3D.new()
+			rp.add_child(h)
+			h.target_position = Vector3.FORWARD * 2
+			h.position = Vector3(((2 / 25.0) * x) - 0.96, ((4.8 / 50) * y), 1.05)
+			h.name = str(x) + "x" + str(y)
+			h.process_mode = Node.PROCESS_MODE_DISABLED
 
 
 func setBrick(id:int) -> void:
@@ -101,6 +110,12 @@ func _unhandled_input(event: InputEvent) -> void:
 		toolrot -= 1
 		if toolrot < 0:
 			toolrot = 3
+	elif event.is_action_pressed("ui_accept"):
+		$"../Camera3D2".current = !$"../Camera3D2".current
+		for i in $rays.get_children():
+			i.force_raycast_update()
+			if i.is_colliding():
+				print(i.name)
 
 
 func click_event(_camera: Node, event: InputEvent, pos: Vector3, _normal: Vector3, _shape_idx: int) -> void:
@@ -128,7 +143,6 @@ func click_event(_camera: Node, event: InputEvent, pos: Vector3, _normal: Vector
 			nb.material_override.albedo_color.g = clampf(nb.material_override.albedo_color.g, 0, 1)
 			nb.material_override.albedo_color.b += randf_range(-0.02, 0.02)
 			nb.material_override.albedo_color.b = clampf(nb.material_override.albedo_color.b, 0, 1)
-			print(selColor.a)
 			if selColor.a < 1:
 				nb.material_override.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
 			add_child(nb)
