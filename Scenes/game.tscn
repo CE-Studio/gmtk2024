@@ -1,4 +1,4 @@
-[gd_scene load_steps=92 format=3 uid="uid://dj2qkj8rk5w52"]
+[gd_scene load_steps=95 format=3 uid="uid://dj2qkj8rk5w52"]
 
 [ext_resource type="Script" path="res://Scripts/CameraTilt.gd" id="1_lhxop"]
 [ext_resource type="PackedScene" uid="uid://bf2sbpklqpo18" path="res://Scenes/buildplate.tscn" id="2_4vgq1"]
@@ -27,6 +27,7 @@
 [ext_resource type="ArrayMesh" uid="uid://dx3aoal7reew7" path="res://Models/tree.obj" id="25_x1ynj"]
 [ext_resource type="ArrayMesh" uid="uid://vbpfxlueyl0a" path="res://Models/car.obj" id="27_3sxew"]
 [ext_resource type="Texture2D" uid="uid://bq00xjjgl1hbx" path="res://Textures/CarAqua.png" id="28_qgcok"]
+[ext_resource type="Texture2D" uid="uid://c012xoy164e6t" path="res://Textures/StickyNotes.png" id="29_68oun"]
 [ext_resource type="Texture2D" uid="uid://de5himimpjgmb" path="res://Textures/CarRed.png" id="29_rb76h"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_hrbhv"]
@@ -451,6 +452,14 @@ _data = {
 "RESET": SubResource("Animation_8ohfd")
 }
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cgqob"]
+transparency = 1
+albedo_texture = ExtResource("29_68oun")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_h3k01"]
+material = SubResource("StandardMaterial3D_cgqob")
+size = Vector2(1.125, 0.4)
+
 [node name="Game" type="Node3D"]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
@@ -647,7 +656,6 @@ text = " Color picker "
 [node name="ColorPicker" type="ColorPicker" parent="PanelContainer/VBoxContainer"]
 visible = false
 layout_mode = 2
-sampler_visible = false
 color_modes_visible = false
 
 [node name="pad" type="MeshInstance3D" parent="."]
@@ -1265,6 +1273,10 @@ text = "
 !   Next level   !
 
 "
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.965926, -0.258819, 0, 0.258819, 0.965926, 0, -0.151919, 1.20316)
+mesh = SubResource("PlaneMesh_h3k01")
 
 [connection signal="input_event" from="blocks/1x1/StaticBody3D" to="blocks/1x1" method="_on_static_body_3d_input_event"]
 [connection signal="input_event" from="blocks/1x2/StaticBody3D" to="blocks/1x2" method="_on_static_body_3d_input_event"]
