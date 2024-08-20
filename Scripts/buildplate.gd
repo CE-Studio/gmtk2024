@@ -110,12 +110,16 @@ func _unhandled_input(event: InputEvent) -> void:
 		toolrot -= 1
 		if toolrot < 0:
 			toolrot = 3
-	elif event.is_action_pressed("ui_accept"):
+	elif event.is_action_pressed("debug"):
 		$"../Camera3D2".current = !$"../Camera3D2".current
-		for i in $rays.get_children():
-			i.force_raycast_update()
-			if i.is_colliding():
-				print(i.name)
+		for i in $rays.get_child_count():
+			var a:RayCast3D = $rays.get_child(i)
+			var b:RayCast3D = $"../pad/rays".get_child(i)
+			a.force_raycast_update()
+			b.force_raycast_update()
+			assert(a.name == b.name)
+			if a.is_colliding() != b.is_colliding():
+				print("mismatch at " + a.name)
 
 
 func click_event(_camera: Node, event: InputEvent, pos: Vector3, _normal: Vector3, _shape_idx: int) -> void:

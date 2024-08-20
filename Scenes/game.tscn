@@ -1,4 +1,4 @@
-[gd_scene load_steps=79 format=3 uid="uid://dj2qkj8rk5w52"]
+[gd_scene load_steps=80 format=3 uid="uid://dj2qkj8rk5w52"]
 
 [ext_resource type="Script" path="res://Scripts/CameraTilt.gd" id="1_lhxop"]
 [ext_resource type="PackedScene" uid="uid://bf2sbpklqpo18" path="res://Scenes/buildplate.tscn" id="2_4vgq1"]
@@ -20,6 +20,7 @@
 [ext_resource type="Script" path="res://Scripts/swatches.gd" id="18_fg52x"]
 [ext_resource type="Script" path="res://Scripts/picker.gd" id="19_vun0m"]
 [ext_resource type="Script" path="res://Scripts/rays.gd" id="20_2rtpt"]
+[ext_resource type="PackedScene" uid="uid://bh1p806ayn23l" path="res://Scenes/buildings/building1.tscn" id="21_8t75j"]
 [ext_resource type="ArrayMesh" uid="uid://kocqyi8j252j" path="res://Models/ground.obj" id="21_prdlg"]
 [ext_resource type="Texture2D" uid="uid://cwq6ln1mssdr7" path="res://Textures/road.png" id="22_4pp6g"]
 [ext_resource type="ArrayMesh" uid="uid://6h7sruhp52no" path="res://Models/road.obj" id="22_gt2xr"]
@@ -542,6 +543,8 @@ mesh = SubResource("PlaneMesh_j8akp")
 
 [node name="rays" type="Node3D" parent="pad"]
 script = ExtResource("20_2rtpt")
+
+[node name="Building1" parent="pad" instance=ExtResource("21_8t75j")]
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
 mesh = ExtResource("21_prdlg")
@@ -1097,6 +1100,17 @@ transform = Transform3D(0.00323695, 0.323455, 0.946238, -0.00110649, 0.946244, -
 mesh = ExtResource("25_x1ynj")
 surface_material_override/0 = SubResource("StandardMaterial3D_xtlah")
 surface_material_override/1 = SubResource("StandardMaterial3D_sqa2s")
+
+[node name="Label" type="Label" parent="."]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -45.0
+offset_top = 5.0
+offset_right = -5.0
+offset_bottom = 28.0
+grow_horizontal = 0
+text = "Accuracy: 0%"
 
 [connection signal="input_event" from="blocks/1x1/StaticBody3D" to="blocks/1x1" method="_on_static_body_3d_input_event"]
 [connection signal="input_event" from="blocks/1x2/StaticBody3D" to="blocks/1x2" method="_on_static_body_3d_input_event"]
