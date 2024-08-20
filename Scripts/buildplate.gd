@@ -139,6 +139,9 @@ func recalc() -> void:
 	accuracy = (correct / float(correct + incorrect)) * 100
 	print(correct, " ", incorrect)
 	$"../Label".text = "Accuracy: " + str(accuracy) + "%"
+	if accuracy > 65:
+		$"../Button".disabled = false
+		$"../Button".show()
 
 
 func click_event(_camera: Node, event: InputEvent, pos: Vector3, _normal: Vector3, _shape_idx: int) -> void:
@@ -171,3 +174,7 @@ func click_event(_camera: Node, event: InputEvent, pos: Vector3, _normal: Vector
 			add_child(nb)
 		else:
 			hlight.material_override.albedo_color = badColor
+
+
+func _on_win_pressed() -> void:
+	pass # Replace with function body.
