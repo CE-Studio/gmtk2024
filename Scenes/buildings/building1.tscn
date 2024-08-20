@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3 uid="uid://bh1p806ayn23l"]
+
+[ext_resource type="Texture2D" uid="uid://digoih0lsm6h6" path="res://Textures/building1.png" id="1_wfm5m"]
+[ext_resource type="ArrayMesh" uid="uid://8i081f7ikpjw" path="res://Models/buildings/building1.obj" id="2_tw3pk"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bouhj"]
+albedo_texture = ExtResource("1_wfm5m")
+
+[node name="Building1" type="Node3D"]
+
+[node name="Building1" type="MeshInstance3D" parent="."]
+material_override = SubResource("StandardMaterial3D_bouhj")
+mesh = ExtResource("2_tw3pk")
