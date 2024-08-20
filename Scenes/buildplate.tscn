@@ -202,4 +202,8 @@ mesh = SubResource("PlaneMesh_5ymlp")
 
 [node name="rays" type="Node3D" parent="."]
 
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
 [connection signal="input_event" from="StaticBody3D" to="." method="click_event"]
+[connection signal="timeout" from="Timer" to="." method="recalc"]
