@@ -1,4 +1,4 @@
-[gd_scene load_steps=80 format=3 uid="uid://dj2qkj8rk5w52"]
+[gd_scene load_steps=93 format=3 uid="uid://dj2qkj8rk5w52"]
 
 [ext_resource type="Script" path="res://Scripts/CameraTilt.gd" id="1_lhxop"]
 [ext_resource type="PackedScene" uid="uid://bf2sbpklqpo18" path="res://Scenes/buildplate.tscn" id="2_4vgq1"]
@@ -26,6 +26,9 @@
 [ext_resource type="ArrayMesh" uid="uid://6h7sruhp52no" path="res://Models/road.obj" id="22_gt2xr"]
 [ext_resource type="ArrayMesh" uid="uid://crhvnwml8y5y2" path="res://Models/tunnel.obj" id="24_xslek"]
 [ext_resource type="ArrayMesh" uid="uid://dx3aoal7reew7" path="res://Models/tree.obj" id="25_x1ynj"]
+[ext_resource type="ArrayMesh" uid="uid://vbpfxlueyl0a" path="res://Models/car.obj" id="27_3sxew"]
+[ext_resource type="Texture2D" uid="uid://bq00xjjgl1hbx" path="res://Textures/CarAqua.png" id="28_qgcok"]
+[ext_resource type="Texture2D" uid="uid://de5himimpjgmb" path="res://Textures/CarRed.png" id="29_rb76h"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_hrbhv"]
 sky_top_color = Color(0.239216, 0.682353, 0.917647, 1)
@@ -336,6 +339,94 @@ albedo_color = Color(0.392157, 0.227451, 0, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sqa2s"]
 albedo_color = Color(0.105882, 0.713726, 0.392157, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6kurn"]
+albedo_texture = ExtResource("28_qgcok")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cbnsp"]
+albedo_texture = ExtResource("28_qgcok")
+
+[sub_resource type="Animation" id="Animation_k462x"]
+resource_name = "Car"
+length = 13.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat64Array(0, 0.7, 3, 3.6, 13),
+"transitions": PackedFloat64Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(-109, -48, -112), Vector3(-67.7778, -51, -112), Vector3(67.6667, -51, -112), Vector3(103, -48, -112), Vector3(105, -48, -112)]
+}
+
+[sub_resource type="Animation" id="Animation_wwqo1"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat64Array(0),
+"transitions": PackedFloat64Array(1),
+"update": 0,
+"values": [Vector3(0, -51, -114)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bo6bo"]
+_data = {
+"Car": SubResource("Animation_k462x"),
+"RESET": SubResource("Animation_wwqo1")
+}
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_alncx"]
+albedo_texture = ExtResource("29_rb76h")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_b8fp6"]
+albedo_texture = ExtResource("29_rb76h")
+
+[sub_resource type="Animation" id="Animation_tsinr"]
+resource_name = "Car"
+length = 23.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat64Array(0),
+"transitions": PackedFloat64Array(1),
+"update": 0,
+"values": [Vector3(104.851, -48, -112)]
+}
+
+[sub_resource type="Animation" id="Animation_8ohfd"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat64Array(0),
+"transitions": PackedFloat64Array(1),
+"update": 0,
+"values": [Vector3(104.851, -48, -112)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_uyp1l"]
+_data = {
+"Car": SubResource("Animation_tsinr"),
+"RESET": SubResource("Animation_8ohfd")
+}
 
 [node name="Game" type="Node3D"]
 
@@ -1111,6 +1202,32 @@ offset_right = -5.0
 offset_bottom = 28.0
 grow_horizontal = 0
 text = "Accuracy: 0%"
+
+[node name="Cars" type="Node3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Cars"]
+transform = Transform3D(6.12323e-17, 0, 1, 0, 1, 0, -1, 0, 6.12323e-17, 0, -51, -114)
+mesh = ExtResource("27_3sxew")
+surface_material_override/0 = SubResource("StandardMaterial3D_6kurn")
+surface_material_override/1 = SubResource("StandardMaterial3D_cbnsp")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Cars/MeshInstance3D"]
+libraries = {
+"": SubResource("AnimationLibrary_bo6bo")
+}
+autoplay = "Car"
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Cars"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 104.851, -48, -112)
+mesh = ExtResource("27_3sxew")
+surface_material_override/0 = SubResource("StandardMaterial3D_alncx")
+surface_material_override/1 = SubResource("StandardMaterial3D_b8fp6")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Cars/MeshInstance3D2"]
+libraries = {
+"": SubResource("AnimationLibrary_uyp1l")
+}
+autoplay = "Car"
 
 [connection signal="input_event" from="blocks/1x1/StaticBody3D" to="blocks/1x1" method="_on_static_body_3d_input_event"]
 [connection signal="input_event" from="blocks/1x2/StaticBody3D" to="blocks/1x2" method="_on_static_body_3d_input_event"]
