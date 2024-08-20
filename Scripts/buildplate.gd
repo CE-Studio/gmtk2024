@@ -5,6 +5,10 @@ class_name BuildPlate
 static var _area:Array = []
 static var instance:BuildPlate
 static var accuracy:float = 0
+static var lvl:int = 0
+static var levels:Array[PackedScene] = [
+	preload("res://Scenes/buildings/building1.tscn"),
+]
 
 static var parts:Array[Brick] = [
 	preload("res://bricks/scn/1x1.tscn").instantiate(),
@@ -68,6 +72,7 @@ static func unConvert(pos:Vector3i) -> Vector3:
 
 func _ready() -> void:
 	instance = self
+	$"../pad".add_child.call_deferred(levels[lvl].instantiate())
 	for x in 25:
 		_area.append([])
 		for y in 50:
@@ -177,4 +182,8 @@ func click_event(_camera: Node, event: InputEvent, pos: Vector3, _normal: Vector
 
 
 func _on_win_pressed() -> void:
-	pass # Replace with function body.
+	lvl += 1
+	if lvl >= levels.size():
+		get_tree().change_scene_to_file("res://Scenes/win.tscn")
+	else:
+		get_tree().change_scene_to_file("res://Scenes/game.tscn")
