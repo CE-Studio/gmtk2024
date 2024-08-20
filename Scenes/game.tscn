@@ -400,10 +400,22 @@ tracks/0/path = NodePath(".:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat64Array(0),
-"transitions": PackedFloat64Array(1),
+"times": PackedFloat64Array(0, 3, 3.3, 3.6, 3.9, 6.6, 6.9, 7.2, 7.5, 10.2, 23),
+"transitions": PackedFloat64Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 0,
-"values": [Vector3(104.851, -48, -112)]
+"values": [Vector3(54, -51, -254), Vector3(54, -51, -127), Vector3(54, -51, -123), Vector3(53, -51, -120), Vector3(51, -51, -118), Vector3(-48, -51, -118), Vector3(-51, -51, -119), Vector3(-53, -51, -121), Vector3(-55, -51, -124), Vector3(-55, -51, -249), Vector3(-55, -51, -249)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat64Array(0, 3, 3.9, 6.6, 7.5, 23),
+"transitions": PackedFloat64Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, -1.5708, 0), Vector3(0, -1.5708, 0), Vector3(0, -3.14159, 0), Vector3(0, -3.14159, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_8ohfd"]
@@ -419,6 +431,18 @@ tracks/0/keys = {
 "transitions": PackedFloat64Array(1),
 "update": 0,
 "values": [Vector3(104.851, -48, -112)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat64Array(0),
+"transitions": PackedFloat64Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_uyp1l"]
