@@ -29,12 +29,12 @@ ground_horizon_color = Color(0.823529, 0.662745, 0.627451, 1)
 ground_curve = 0.05
 sun_curve = 0.764736
 
-[sub_resource type="Sky" id="Sky_vg1yd"]
+[sub_resource type="Sky" id="Sky_48a6r"]
 sky_material = SubResource("ProceduralSkyMaterial_we1o5")
 
 [sub_resource type="Environment" id="Environment_2rprx"]
 background_mode = 2
-sky = SubResource("Sky_vg1yd")
+sky = SubResource("Sky_48a6r")
 ambient_light_source = 3
 ambient_light_color = Color(0.85098, 0.85098, 0.85098, 1)
 ambient_light_sky_contribution = 0.0
@@ -275,7 +275,7 @@ tracks/8/keys = {
 "times": PackedFloat64Array(0, 13, 16, 17, 18, 19),
 "transitions": PackedFloat64Array(1, 0.5, 0.450625, 2, 0.5, 1),
 "update": 0,
-"values": [Vector2(0, 0), Vector2(1e-05, 1e-05), Vector2(3, 3), Vector2(3, 3), Vector2(2.5, 2.5), Vector2(2, 2)]
+"values": [Vector2(0, 0), Vector2(1e-05, 1e-05), Vector2(1.5, 1.5), Vector2(1.5, 1.5), Vector2(1.25, 1.25), Vector2(1, 1)]
 }
 tracks/9/type = "value"
 tracks/9/imported = false
@@ -287,7 +287,7 @@ tracks/9/keys = {
 "times": PackedFloat64Array(0, 17, 18, 19),
 "transitions": PackedFloat64Array(1, 2, 0.5, 1),
 "update": 0,
-"values": [Vector2(-108, 250), Vector2(-108, 250), Vector2(-108, 175), Vector2(-108, 100)]
+"values": [Vector2(-235, 120), Vector2(-235, 120), Vector2(-235, 90), Vector2(-235, 60)]
 }
 tracks/10/type = "value"
 tracks/10/imported = false
@@ -410,7 +410,7 @@ tracks/8/keys = {
 "times": PackedFloat64Array(0),
 "transitions": PackedFloat64Array(1),
 "update": 0,
-"values": [Vector2(2, 2)]
+"values": [Vector2(1, 1)]
 }
 tracks/9/type = "value"
 tracks/9/imported = false
@@ -422,7 +422,7 @@ tracks/9/keys = {
 "times": PackedFloat64Array(0),
 "transitions": PackedFloat64Array(1),
 "update": 0,
-"values": [Vector2(-108, 100)]
+"values": [Vector2(-235, 60)]
 }
 tracks/10/type = "value"
 tracks/10/imported = false
@@ -584,14 +584,13 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -128.0
-offset_top = 80.0
-offset_right = 128.0
-offset_bottom = 208.0
+offset_left = -235.0
+offset_top = 60.0
+offset_right = 279.0
+offset_bottom = 352.0
 grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(2, 2)
-pivot_offset = Vector2(128, 64)
+pivot_offset = Vector2(257, 146)
 texture = ExtResource("7_f4p1r")
 script = SubResource("GDScript_bl6hn")
 
@@ -616,10 +615,10 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -237.0
-offset_top = -215.0
-offset_right = 237.0
-offset_bottom = -100.0
+offset_left = -217.0
+offset_top = -175.0
+offset_right = 257.0
+offset_bottom = -60.0
 grow_horizontal = 2
 grow_vertical = 0
 

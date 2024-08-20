@@ -1,3 +1,111 @@
-[gd_scene format=3 uid="uid://bqkmc22gm0r0w"]
+[gd_scene load_steps=7 format=3 uid="uid://bqkmc22gm0r0w"]
+
+[ext_resource type="ArrayMesh" uid="uid://d0l3b6jm4qg3f" path="res://bricks/2x2.obj" id="1_ghi1p"]
+[ext_resource type="FontFile" uid="uid://bv3wsu3egaurn" path="res://Fonts/NovaRound-Regular.ttf" id="2_4mvnr"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_sipvx"]
+sky_top_color = Color(0.00784314, 0.180392, 0.356863, 1)
+sky_horizon_color = Color(0.454902, 0.423529, 0.172549, 1)
+ground_bottom_color = Color(0.0980392, 0.227451, 0.117647, 1)
+ground_horizon_color = Color(0, 0.172549, 0.129412, 1)
+
+[sub_resource type="Sky" id="Sky_g0cxu"]
+sky_material = SubResource("ProceduralSkyMaterial_sipvx")
+
+[sub_resource type="Environment" id="Environment_306oo"]
+background_mode = 2
+sky = SubResource("Sky_g0cxu")
+ambient_light_source = 3
+ambient_light_color = Color(0.85098, 0.85098, 0.85098, 1)
+ambient_light_sky_contribution = 0.0
+
+[sub_resource type="GDScript" id="GDScript_rem0b"]
+resource_name = "MenuCamSpin"
+script/source = "extends Node3D
+
+
+const cam_spin:float = 0.1
+
+
+func _ready():
+	pass # Replace with function body.
+
+
+func _process(delta):
+	rotate_y(cam_spin * delta)
+"
 
 [node name="Win" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_306oo")
+
+[node name="CameraGyro" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 0, 0)
+script = SubResource("GDScript_rem0b")
+
+[node name="Camera3D" type="Camera3D" parent="CameraGyro"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5)
+fov = 60.0
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.258819, 0.965926, 0, -0.965926, 0.258819, 0, 0, 0)
+
+[node name="CPUParticles3D" type="CPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7, 0)
+amount = 40
+lifetime = 5.0
+mesh = ExtResource("1_ghi1p")
+emission_shape = 3
+emission_box_extents = Vector3(4, 1, 4)
+gravity = Vector3(0, -2, 0)
+initial_velocity_max = 1.0
+angular_velocity_min = -180.0
+angular_velocity_max = 180.0
+angle_min = -180.0
+angle_max = 180.0
+scale_amount_min = 0.25
+color = Color(1, 0.286275, 0.227451, 1)
+hue_variation_min = -1.0
+hue_variation_max = 1.0
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_4mvnr")
+theme_override_font_sizes/font_size = 28
+text = "Well, you've done it. You've become master of the brick
+
+You've taken the time to carefully piece together some fantastic
+little replicas of these urban monoliths, with your own flair,
+your own personal touch sprinkled in.
+
+Perhaps you went for full replicas. Perhaps you went for goofy
+reimaginings. Perhaps you chose to simply match the
+silhouette just to pass each stage, and nothing more. I don't know.
+I'm just a wall of text. But in any case, you did it.
+
+Feels good, doesn't it? To have made something you can truly
+call your own. Something you can look upon with pride.
+
+Something you have built. To scale.
+(The end)"
+horizontal_alignment = 1
